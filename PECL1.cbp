@@ -34,27 +34,17 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="include/Central.hpp" />
 		<Unit filename="include/CodigoId.hpp" />
-		<Unit filename="include/Cola.hpp" />
 		<Unit filename="include/Coord.hpp" />
 		<Unit filename="include/Etiqueta.hpp" />
-		<Unit filename="include/Muelle.hpp" />
 		<Unit filename="include/Nif.hpp" />
-		<Unit filename="include/NodoCola.hpp" />
-		<Unit filename="include/Pila.hpp" />
 		<Unit filename="include/Random.hpp" />
 		<Unit filename="include/Semicoord.hpp" />
 		<Unit filename="main.cpp" />
-		<Unit filename="src/Central.cpp" />
 		<Unit filename="src/CodigoId.cpp" />
-		<Unit filename="src/Cola.cpp" />
 		<Unit filename="src/Coord.cpp" />
 		<Unit filename="src/Etiqueta.cpp" />
-		<Unit filename="src/Muelle.cpp" />
 		<Unit filename="src/Nif.cpp" />
-		<Unit filename="src/NodoCola.cpp" />
-		<Unit filename="src/Pila.cpp" />
 		<Unit filename="src/Random.cpp" />
 		<Unit filename="src/Semicoord.cpp" />
 		<Extensions>
