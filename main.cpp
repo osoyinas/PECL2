@@ -7,6 +7,7 @@
 #define N2 100      //Paquetes generados aleatoriamente.
 #define N3 12       //Paquetes a enviar en cada ejecucion.
 #define N4 6*N3     //Cada cuantos paquetes mostrar el menu.
+
 using namespace std;
 
 int main()
