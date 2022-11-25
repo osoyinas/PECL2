@@ -34,17 +34,21 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="include/ArbolBinario.hpp" />
 		<Unit filename="include/CodigoId.hpp" />
 		<Unit filename="include/Coord.hpp" />
 		<Unit filename="include/Etiqueta.hpp" />
 		<Unit filename="include/Nif.hpp" />
+		<Unit filename="include/NodoBinario.hpp" />
 		<Unit filename="include/Random.hpp" />
 		<Unit filename="include/Semicoord.hpp" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/ArbolBinario.cpp" />
 		<Unit filename="src/CodigoId.cpp" />
 		<Unit filename="src/Coord.cpp" />
 		<Unit filename="src/Etiqueta.cpp" />
 		<Unit filename="src/Nif.cpp" />
+		<Unit filename="src/NodoBinario.cpp" />
 		<Unit filename="src/Random.cpp" />
 		<Unit filename="src/Semicoord.cpp" />
 		<Extensions>
