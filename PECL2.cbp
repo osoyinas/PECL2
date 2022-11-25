@@ -34,6 +34,7 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="include/Central.hpp" />
 		<Unit filename="include/CodigoId.hpp" />
 		<Unit filename="include/Coord.hpp" />
 		<Unit filename="include/Etiqueta.hpp" />
@@ -41,6 +42,7 @@
 		<Unit filename="include/Random.hpp" />
 		<Unit filename="include/Semicoord.hpp" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/Central.cpp" />
 		<Unit filename="src/CodigoId.cpp" />
 		<Unit filename="src/Coord.cpp" />
 		<Unit filename="src/Etiqueta.cpp" />
