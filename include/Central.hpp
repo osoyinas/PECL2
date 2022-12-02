@@ -2,15 +2,15 @@
 #define CENTRAL_H
 
 #include <string>
-#include <vector>
 #include "Paquete.hpp"
+#include "Lista.hpp"
 using namespace std;
-struct Central
-{
+struct Central {
     Central();
+    void addPaquete(Paquete paquete);
     string CP;
     string localidad;
-    vector<Paquete> listaPaquetes;
+    Lista listaPaquetes;
 };
-Central crearCentral(string localidad, vector<Paquete> listaPaquetes);
+Central crearCentral(string localidad, Lista listaPaquetes);
 #endif // CENTRAL_H
