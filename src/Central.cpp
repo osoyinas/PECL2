@@ -4,7 +4,9 @@ Central::Central()
 {
     //ctor
 }
-
+void Central::addPaquete (Paquete paquete){
+    return ;
+}
 string generarCP(){
 
     string CP;
@@ -15,9 +17,11 @@ string generarCP(){
     return CP;
 }
 
-Central crearCentral(string localidad, vector<Paquete> listaPaquetes){
+Central crearCentral(string localidad, Lista listaPaquetes){
     Central central;
     central.CP = generarCP();
     central.localidad = localidad;
     central.listaPaquetes = listaPaquetes;
 }
+
+
