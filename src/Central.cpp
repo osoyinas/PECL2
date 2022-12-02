@@ -15,7 +15,7 @@ string generarCP(){
     return CP;
 }
 
-Central crearCentral(string localidad, vector<Etiqueta> listaPaquetes){
+Central crearCentral(string localidad, vector<Paquete> listaPaquetes){
     Central central;
     central.CP = generarCP();
     central.localidad = localidad;

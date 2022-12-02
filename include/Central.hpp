@@ -3,14 +3,14 @@
 
 #include <string>
 #include <vector>
-#include "Etiqueta.hpp"
+#include "Paquete.hpp"
 using namespace std;
 struct Central
 {
     Central();
     string CP;
     string localidad;
-    vector<Etiqueta> listaPaquetes;
+    vector<Paquete> listaPaquetes;
 };
-Central crearCentral(string localidad, vector<Etiqueta> listaPaquetes);
+Central crearCentral(string localidad, vector<Paquete> listaPaquetes);
 #endif // CENTRAL_H

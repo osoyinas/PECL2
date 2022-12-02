@@ -4,24 +4,24 @@
 class ArbolBinario
 {
     private:
-        pNodo raiz, actual = NULL;
+        pNodoBinario raiz, actual = NULL;
         int contador, altura;
-        void podar(pNodo &nodo);
-        void auxContador(pNodo nodo);
-        void auxAltura(pNodo nodo, int a);
+        void podar(pNodoBinario &nodo);
+        void auxContador(pNodoBinario nodo);
+        void auxAltura(pNodoBinario nodo, int a);
         void mostrar(int &d);
     public:
         ArbolBinario();
-        ~ArbolBinario();
-        void buscarNodo (char v);
-        void insertarNodo (char v);
-        void borrarNodo (char v);
-        bool esVacio(pNodo nodo);
-        bool esHoja(pNodo nodo);
+        ~ArbolBinario(){podar(raiz);}
+        bool buscarNodo (int v);
+        void insertarNodo (int v);
+        void borrarNodo (int v);
+        bool esVacio(pNodoBinario nodo) {return raiz==NULL;}
+        bool esHoja(pNodoBinario nodo) {return !nodo->derecha && !nodo->izquierda;}
         int numeroNodos();
         int getAlturaArbol();
-        char getValorActual();
-        void esRaiz();
+        char getValorActual() {return actual->dato;}
+        void esRaiz() {actual = raiz;}
         void inOrden(NodoBinario *nodo);
         void preOrden(NodoBinario *nodo);
         void postOrden(NodoBinario *nodo);

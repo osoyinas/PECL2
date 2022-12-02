@@ -5,10 +5,10 @@
 #include "Coord.hpp"
 #include "Nif.hpp"
 
-struct Etiqueta
+struct Paquete
 {
     //Constructor
-    Etiqueta();
+    Paquete();
 
     //Atributos
     CodigoId id;
@@ -16,7 +16,7 @@ struct Etiqueta
     Coord coords;
 };
 //Funciones
-Etiqueta crearEtiqueta(CodigoId, Nif, Coord);
-Etiqueta generarEtiqueta(int,Semicoord,Semicoord,Semicoord,Semicoord);
+Paquete crearPaquete(CodigoId, Nif, Coord);
+Paquete generarPaquete(int,Semicoord,Semicoord,Semicoord,Semicoord);
 
 #endif // ETIQUETA_H

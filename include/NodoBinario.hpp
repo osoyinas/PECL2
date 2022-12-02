@@ -1,6 +1,5 @@
 #ifndef NODOBINARIO_H
 #define NODOBINARIO_H
-
 #include <iostream>
 
 class NodoBinario{
@@ -12,6 +11,6 @@ class NodoBinario{
     public:
         NodoBinario (int dat, NodoBinario *izq = NULL, NodoBinario * der=NULL);
 };
-typedef NodoBinario *pNodo;
+typedef NodoBinario *pNodoBinario;
 
 #endif // NODOBINARIO_H
