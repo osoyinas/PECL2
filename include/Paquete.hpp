@@ -16,7 +16,7 @@ struct Paquete
     Coord coords;
 };
 //Funciones
-Paquete crearEtiqueta(CodigoId, Nif, Coord);
-Paquete generarEtiqueta(int,Semicoord,Semicoord,Semicoord,Semicoord);
+Paquete crearPaquete(CodigoId, Nif, Coord);
+Paquete generarPaquete(int,Semicoord,Semicoord,Semicoord,Semicoord);
 
 #endif // ETIQUETA_H

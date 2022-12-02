@@ -1,21 +1,16 @@
 #ifndef NODOLISTA_H
 #define NODOLISTA_H
-
-#define NULL NULL
+#include <iostream>
+#include "Paquete.hpp";
 class NodoLista
 {
     private:
-        int valor;
+        Paquete valor;
         NodoLista *siguiente;
         NodoLista *anterior;
         friend class Lista;
     public:
-        NodoLista(int v, NodoLista *sig = NULL, NodoLista *ant = NULL)
-        {
-            valor = v;
-            siguiente = sig;
-            anterior = ant;
-        }
+        NodoLista(Paquete v, NodoLista *sig, NodoLista *ant);
 };
 typedef NodoLista *pnodo;
 #endif // NODOLISTA_H
