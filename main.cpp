@@ -23,12 +23,12 @@ int main()
     Paquete p2 = generarPaquete(4,s,s,s,s);
 
     Central central = crearCentral("Albacete");
-    central.addPaquete(p1);
-    central.addPaquete(p2);
-    central.listaPaquetes.recorrerLista(0);
+    Central central2 = crearCentral("Cuenca");
     ArbolBinario arb;
-    arb.crearNodo(central);
-    //Central central = crearCentral("Albacete", lista);
+    NodoBinario* raiz = arb.crearNodo(central);
+    arb.setRaiz(raiz);
+    arb.insertarNodo(arb.getRaiz(), central2);
+    arb.postOrden(arb.getRaiz());
     return 0;
 }
 

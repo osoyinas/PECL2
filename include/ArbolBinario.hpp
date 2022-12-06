@@ -2,7 +2,7 @@
 #define ARBOLBINARIO_HPP
 #include "NodoBinario.hpp"
 #include "Central.hpp"
-
+#include <iostream>
 using namespace std;
 
 class ArbolBinario
@@ -24,7 +24,7 @@ public:
     NodoBinario* getRaiz() {
         return raiz;
     }
-    void ponerLaRaiz(NodoBinario* puntero) {
+    void setRaiz(NodoBinario* puntero) {
         raiz = puntero;
     }
 };

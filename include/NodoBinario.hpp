@@ -4,8 +4,8 @@
 #include <Central.hpp>
 struct NodoBinario {
     Central elemento;
-    NodoBinario* hijoIzquierdo;
-    NodoBinario* hijoDerecho;
+    NodoBinario* izquierdo;
+    NodoBinario* derecho;
 };
 
 #endif // NODOBINARIO_H

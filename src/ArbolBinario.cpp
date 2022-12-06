@@ -1,104 +1,98 @@
 #include "ArbolBinario.hpp"
 
-NodoBinario* ArbolBinario :: crearNodo(Central elemEnviado)   // Crea un nuevo nodo y devuelve la referencia a ese nodo. Esto pasa en cada llamada de la función insertarNodo
-{
-    NodoBinario* nuevoNodo = new  struct NodoBinario(); // poner struct es redundante, pero es seguro
-    nuevoNodo->elemento = elemEnviado; // Asignando el elemento enviado a la parte elemento del nodo nuevo
-    nuevoNodo->hijoIzquierdo = nuevoNodo->hijoDerecho = NULL;; // Asignando NULL a hijo izquierdo y derecho del nuevo nodo
+NodoBinario* ArbolBinario :: crearNodo(Central elemEnviado) {
+    NodoBinario* nuevoNodo = new NodoBinario();
+    nuevoNodo->elemento = elemEnviado;
+    nuevoNodo->izquierdo = nuevoNodo->derecho = NULL;
     return nuevoNodo;
 }
-NodoBinario* ArbolBinario :: getMin(NodoBinario* punteroRaiz)   // Para obtener el predecesor En-Orden para borrar el nodo del árbol
-{
-    while(punteroRaiz->hijoIzquierdo != NULL)
+NodoBinario* ArbolBinario :: getMin(NodoBinario* punteroRaiz) {
+    while(punteroRaiz->izquierdo != NULL)
     {
-        punteroRaiz = punteroRaiz->hijoIzquierdo;
+        punteroRaiz = punteroRaiz->izquierdo;
     }
     return punteroRaiz;
 }
 
-NodoBinario* ArbolBinario :: insertarNodo(NodoBinario* punteroRaiz, Central elemEnviado)   // Insertando el Nodo
-{
-    if(punteroRaiz == NULL)
+NodoBinario* ArbolBinario :: insertarNodo(NodoBinario* pRaiz, Central elemEnviado) {
+    if(pRaiz == NULL)
     {
         return crearNodo(elemEnviado);
     }
-    if(elemEnviado.CP < punteroRaiz->elemento.CP)
+    if(elemEnviado.CP < pRaiz->elemento.CP)
     {
-        punteroRaiz->hijoIzquierdo = insertarNodo(punteroRaiz->hijoIzquierdo, elemEnviado);
+        pRaiz->izquierdo = insertarNodo(pRaiz->izquierdo, elemEnviado);
     }
-    if(elemEnviado.CP > punteroRaiz->elemento.CP)
+    if(elemEnviado.CP > pRaiz->elemento.CP)
     {
-        punteroRaiz->hijoDerecho = insertarNodo(punteroRaiz->hijoDerecho, elemEnviado);
+        pRaiz->derecho = insertarNodo(pRaiz->derecho, elemEnviado);
     }
-    return punteroRaiz;
+    return pRaiz;
 }
-NodoBinario* ArbolBinario :: borrarNodo(NodoBinario* punteroRaiz, Central elemEnviado)   // Borrando el Nodo
-{
-    if(punteroRaiz == NULL)
+NodoBinario* ArbolBinario :: borrarNodo(NodoBinario* pRaiz, Central elemEnviado) {
+    if(pRaiz == NULL)
     {
-        cout << "\n El Nodo que se quiere borrar no existe !!!" << endl;
-        return punteroRaiz;
+        cout << "\n El Nodo que no existe" << endl;
+        return pRaiz;
     }
-    else if(elemEnviado.CP < punteroRaiz->elemento.CP)
+    else if(elemEnviado.CP < pRaiz->elemento.CP)
     {
-        punteroRaiz->hijoIzquierdo = borrarNodo(punteroRaiz->hijoIzquierdo, elemEnviado);
+        pRaiz->izquierdo = borrarNodo(pRaiz->izquierdo, elemEnviado);
     }
-    else if(elemEnviado.CP > punteroRaiz->elemento.CP)
+    else if(elemEnviado.CP > pRaiz->elemento.CP)
     {
-        punteroRaiz->hijoDerecho = borrarNodo(punteroRaiz->hijoDerecho, elemEnviado);
+        pRaiz->derecho = borrarNodo(pRaiz->derecho, elemEnviado);
     }
     else
     {
-        if(punteroRaiz->hijoIzquierdo == NULL && punteroRaiz->hijoDerecho == NULL)
+        if(pRaiz->izquierdo == NULL && pRaiz->derecho == NULL)
         {
-            // Si los hijos son NULL
-            delete punteroRaiz;
-            punteroRaiz = NULL;
+            delete pRaiz;
+            pRaiz = NULL;
         }
-        else if(raiz->hijoIzquierdo == NULL)
+        else if(raiz->izquierdo == NULL)
         {
-            struct NodoBinario* tempo = punteroRaiz;
-            punteroRaiz = punteroRaiz->hijoDerecho;
+            struct NodoBinario* tempo = pRaiz;
+            pRaiz = pRaiz->derecho;
             delete tempo;
         }
-        else if(punteroRaiz->hijoDerecho == NULL)
+        else if(pRaiz->derecho == NULL)
         {
-            struct NodoBinario* tempo = punteroRaiz;
-            punteroRaiz = punteroRaiz->hijoIzquierdo;
+            struct NodoBinario* tempo = pRaiz;
+            pRaiz = pRaiz->izquierdo;
             delete tempo;
         }
         else
         {
-            NodoBinario* tempo = getMin(punteroRaiz->hijoDerecho);
-            punteroRaiz->elemento = tempo->elemento;
-            punteroRaiz->hijoIzquierdo = borrarNodo(punteroRaiz->hijoDerecho, tempo->elemento);
+            NodoBinario* tempo = getMin(pRaiz->derecho);
+            pRaiz->elemento = tempo->elemento;
+            pRaiz->izquierdo = borrarNodo(pRaiz->derecho, tempo->elemento);
         }
     }
-// cout << "\n Elemento borrado: " << elemEnviado << endl;
-    return punteroRaiz;
+    return pRaiz;
 }
 
-void ArbolBinario :: inOrden(NodoBinario* raiz)   // Recorriendo el árbol en en-Orden
-{
-    if(raiz == NULL)
-    {
+void ArbolBinario :: inOrden(NodoBinario* raiz) {
+    if(raiz == NULL) {
         return;
     }
-    inOrden(raiz->hijoIzquierdo);
+    inOrden(raiz->izquierdo);
     cout << raiz->elemento.CP << "\t";
-    inOrden(raiz->hijoDerecho);
+    inOrden(raiz->derecho);
 }
-void ArbolBinario :: preOrden(NodoBinario* raiz)   // Recorriendo el árbol en pre-Orden
-{
+void ArbolBinario :: preOrden(NodoBinario* raiz) {
     if(raiz == NULL) return;
     cout << raiz->elemento.CP << "\t";
-    preOrden(raiz->hijoIzquierdo);
-    preOrden(raiz->hijoDerecho);
+    preOrden(raiz->izquierdo);
+    preOrden(raiz->derecho);
 }
-void ArbolBinario :: postOrden(NodoBinario* raiz)   // Recorriendo el árbol en post-Orden
+void ArbolBinario :: postOrden(NodoBinario* raiz)
 {
-    if(raiz == NULL) return;
-    postOrden(raiz->hijoIzquierdo);
-    postOrden(raiz->hijoDerecho);
-    cout << raiz->elemento.CP << "\t";
+
+    if(raiz == NULL) {
+    return;
+    }
+    postOrden(raiz->izquierdo);
+    postOrden(raiz->derecho);
+    cout << raiz->elemento.CP << "  "<<raiz->elemento.localidad<< "\n";
 }
