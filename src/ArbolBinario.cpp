@@ -19,11 +19,11 @@ NodoBinario* ArbolBinario :: insertarNodo(NodoBinario* pRaiz, Central elemEnviad
     {
         return crearNodo(elemEnviado);
     }
-    if(elemEnviado.CP < pRaiz->elemento.CP)
+    if(elemEnviado.ID < pRaiz->elemento.ID)
     {
         pRaiz->izquierdo = insertarNodo(pRaiz->izquierdo, elemEnviado);
     }
-    if(elemEnviado.CP > pRaiz->elemento.CP)
+    if(elemEnviado.ID > pRaiz->elemento.ID)
     {
         pRaiz->derecho = insertarNodo(pRaiz->derecho, elemEnviado);
     }
@@ -35,11 +35,11 @@ NodoBinario* ArbolBinario :: borrarNodo(NodoBinario* pRaiz, Central elemEnviado)
         cout << "\n El Nodo que no existe" << endl;
         return pRaiz;
     }
-    else if(elemEnviado.CP < pRaiz->elemento.CP)
+    else if(elemEnviado.ID < pRaiz->elemento.ID)
     {
         pRaiz->izquierdo = borrarNodo(pRaiz->izquierdo, elemEnviado);
     }
-    else if(elemEnviado.CP > pRaiz->elemento.CP)
+    else if(elemEnviado.ID > pRaiz->elemento.ID)
     {
         pRaiz->derecho = borrarNodo(pRaiz->derecho, elemEnviado);
     }
@@ -77,12 +77,12 @@ void ArbolBinario :: inOrden(NodoBinario* raiz) {
         return;
     }
     inOrden(raiz->izquierdo);
-    cout << raiz->elemento.CP << "\t";
+    cout << raiz->elemento.ID << "\t";
     inOrden(raiz->derecho);
 }
 void ArbolBinario :: preOrden(NodoBinario* raiz) {
     if(raiz == NULL) return;
-    cout << raiz->elemento.CP << "\t";
+    cout << raiz->elemento.ID << "\n";
     preOrden(raiz->izquierdo);
     preOrden(raiz->derecho);
 }
@@ -94,5 +94,5 @@ void ArbolBinario :: postOrden(NodoBinario* raiz)
     }
     postOrden(raiz->izquierdo);
     postOrden(raiz->derecho);
-    cout << raiz->elemento.CP << "  "<<raiz->elemento.localidad<< "\n";
+    cout << raiz->elemento.ID << "  "<<raiz->elemento.localidad<< "\n";
 }

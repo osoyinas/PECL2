@@ -24,8 +24,8 @@ public:
     NodoBinario* getRaiz() {
         return raiz;
     }
-    void setRaiz(NodoBinario* puntero) {
-        raiz = puntero;
+    void setRaiz(NodoBinario* nodo) {
+        raiz = nodo;
     }
 };
 

@@ -21,7 +21,8 @@ Lista::~Lista() {
 }
 void Lista::insertarNodo(Paquete v, char c) {
     pnodo aux;
-    char tipoInsercion; tipoInsercion=c;
+    char tipoInsercion;
+    tipoInsercion=c;
     if(listaVacia()) { // Si la lista está vacía
         aux = new NodoLista(v,NULL,NULL);
         final=cabeza=aux;
@@ -95,7 +96,11 @@ void Lista::recorrerLista (int orden) {
     }
     cout << endl;
 }
+Paquete Lista::getUlt(){
 
+    return final->valor;
+
+}
 bool Lista::listaVacia(){
     return cabeza == NULL;
 }

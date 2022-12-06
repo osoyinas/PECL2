@@ -19,6 +19,7 @@ class Lista
         void esPrimero();
         void esUltimo();
         bool esActual();
+        Paquete getUlt();
         Paquete valorActual();
 };
 

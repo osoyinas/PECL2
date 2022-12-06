@@ -17,11 +17,17 @@ string generarCP(){
     return CP;
 }
 
-Central crearCentral(string localidad){
+Central crearCentral(string localidad, int ID){
     Central central;
-    central.CP = generarCP();
+    central.ID = ID;
     central.localidad = localidad;
     return central;
+}
+
+int generarID(){
+    int random;
+    random = generarRandom(1,9999);
+    return random;
 }
 
 

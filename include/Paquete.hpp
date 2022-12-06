@@ -14,10 +14,11 @@ struct Paquete
     CodigoId id;
     Nif nif;
     Coord coords;
+    int CP;
 };
 //Funciones
 
-Paquete crearPaquete(CodigoId, Nif, Coord);
-Paquete generarPaquete(int,Semicoord,Semicoord,Semicoord,Semicoord);
+Paquete crearPaquete(CodigoId, Nif, Coord, int);
+Paquete generarPaquete(int,Semicoord,Semicoord,Semicoord,Semicoord, int);
 
 #endif // ETIQUETA_H
