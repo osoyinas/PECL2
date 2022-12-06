@@ -1,99 +1,104 @@
 #include "ArbolBinario.hpp"
-using namespace std;
-ArbolBinario::ArbolBinario(){}
-void ArbolBinario::podar(pNodoBinario &nodo){
-    if(nodo){
-        podar(nodo->izquierda); // Podar izquierdo
-        podar(nodo->derecha);// Podar derecho
-        delete nodo;// Eliminar nodo
-        nodo = NULL;
-    }
+
+NodoBinario* ArbolBinario :: crearNodo(Central elemEnviado)   // Crea un nuevo nodo y devuelve la referencia a ese nodo. Esto pasa en cada llamada de la función insertarNodo
+{
+    NodoBinario* nuevoNodo = new  struct NodoBinario(); // poner struct es redundante, pero es seguro
+    nuevoNodo->elemento = elemEnviado; // Asignando el elemento enviado a la parte elemento del nodo nuevo
+    nuevoNodo->hijoIzquierdo = nuevoNodo->hijoDerecho = NULL;; // Asignando NULL a hijo izquierdo y derecho del nuevo nodo
+    return nuevoNodo;
 }
-bool ArbolBinario::buscarNodo(int dato){
-    actual = raiz;
-    while(!esVacio(actual)){
-        if(dato == actual->dato) return true;
+NodoBinario* ArbolBinario :: getMin(NodoBinario* punteroRaiz)   // Para obtener el predecesor En-Orden para borrar el nodo del árbol
+{
+    while(punteroRaiz->hijoIzquierdo != NULL)
+    {
+        punteroRaiz = punteroRaiz->hijoIzquierdo;
+    }
+    return punteroRaiz;
+}
+
+NodoBinario* ArbolBinario :: insertarNodo(NodoBinario* punteroRaiz, Central elemEnviado)   // Insertando el Nodo
+{
+    if(punteroRaiz == NULL)
+    {
+        return crearNodo(elemEnviado);
+    }
+    if(elemEnviado.CP < punteroRaiz->elemento.CP)
+    {
+        punteroRaiz->hijoIzquierdo = insertarNodo(punteroRaiz->hijoIzquierdo, elemEnviado);
+    }
+    if(elemEnviado.CP > punteroRaiz->elemento.CP)
+    {
+        punteroRaiz->hijoDerecho = insertarNodo(punteroRaiz->hijoDerecho, elemEnviado);
+    }
+    return punteroRaiz;
+}
+NodoBinario* ArbolBinario :: borrarNodo(NodoBinario* punteroRaiz, Central elemEnviado)   // Borrando el Nodo
+{
+    if(punteroRaiz == NULL)
+    {
+        cout << "\n El Nodo que se quiere borrar no existe !!!" << endl;
+        return punteroRaiz;
+    }
+    else if(elemEnviado.CP < punteroRaiz->elemento.CP)
+    {
+        punteroRaiz->hijoIzquierdo = borrarNodo(punteroRaiz->hijoIzquierdo, elemEnviado);
+    }
+    else if(elemEnviado.CP > punteroRaiz->elemento.CP)
+    {
+        punteroRaiz->hijoDerecho = borrarNodo(punteroRaiz->hijoDerecho, elemEnviado);
+    }
+    else
+    {
+        if(punteroRaiz->hijoIzquierdo == NULL && punteroRaiz->hijoDerecho == NULL)
+        {
+            // Si los hijos son NULL
+            delete punteroRaiz;
+            punteroRaiz = NULL;
+        }
+        else if(raiz->hijoIzquierdo == NULL)
+        {
+            struct NodoBinario* tempo = punteroRaiz;
+            punteroRaiz = punteroRaiz->hijoDerecho;
+            delete tempo;
+        }
+        else if(punteroRaiz->hijoDerecho == NULL)
+        {
+            struct NodoBinario* tempo = punteroRaiz;
+            punteroRaiz = punteroRaiz->hijoIzquierdo;
+            delete tempo;
+        }
         else
-        if(dato > actual->dato) actual = actual->derecha;
-        else if(dato < actual->dato) actual = actual->izquierda;
-    }
-    return false;
-}
-void ArbolBinario::insertarNodo(int dato){
-    NodoBinario *padre = NULL;
-    actual = raiz;
-    while(!esVacio(actual) && dato != actual->dato){
-        padre = actual;
-        if(dato > actual->dato) actual = actual->derecha;
-        else if(dato < actual->dato) actual = actual->izquierda;
-    }
-    if(!esVacio(actual)) return;
-    if(esVacio(padre)) raiz = new NodoBinario(dato);
-    else if(dato < padre->dato) padre->izquierda = new NodoBinario(dato);
-    else if(dato > padre->dato) padre->derecha = new NodoBinario(dato);
-}
-void ArbolBinario::borrarNodo(int dato){
-    NodoBinario *padre = NULL;
-    NodoBinario *nodo;
-    char aux;
-    actual = raiz;
-    while(!esVacio(actual)){
-        if(dato == actual->dato){ // Si el valor est� en el nodo actual
-            if(esHoja(actual)){
-            if(padre) // Si tiene padre (no es el nodo raiz)
-            if(padre->derecha == actual) padre->derecha = NULL;
-            else if(padre->izquierda == actual) padre->izquierda = NULL;
-            delete actual; // Borrar el nodo
-            actual = NULL;
-            return;
-            }
-            else{
-            padre = actual;
-            if(actual->derecha){
-                nodo = actual->derecha;
-                while(nodo->izquierda){
-                padre = nodo;
-                nodo = nodo->izquierda;
-                }
-            }
-                else{
-                    nodo = actual->izquierda;
-                    while(nodo->derecha){
-                        padre = nodo;
-                        nodo = nodo->derecha;
-                    }
-                }
-            aux = actual->dato;
-            actual->dato = nodo->dato;
-            nodo->dato = aux;
-            actual = nodo;
-            }
-        }
-        else{
-            padre = actual;
-            if(dato > actual->dato) actual = actual->derecha;
-            else if(dato < actual->dato) actual = actual->izquierda;
+        {
+            NodoBinario* tempo = getMin(punteroRaiz->hijoDerecho);
+            punteroRaiz->elemento = tempo->elemento;
+            punteroRaiz->hijoIzquierdo = borrarNodo(punteroRaiz->hijoDerecho, tempo->elemento);
         }
     }
+// cout << "\n Elemento borrado: " << elemEnviado << endl;
+    return punteroRaiz;
 }
-void ArbolBinario::preOrden(pNodoBinario nodo){
-    if (nodo!= NULL){
-        cout << nodo->dato <<" ";
-        preOrden(nodo->izquierda);
-        preOrden(nodo->derecha);
+
+void ArbolBinario :: inOrden(NodoBinario* raiz)   // Recorriendo el árbol en en-Orden
+{
+    if(raiz == NULL)
+    {
+        return;
     }
+    inOrden(raiz->hijoIzquierdo);
+    cout << raiz->elemento.CP << "\t";
+    inOrden(raiz->hijoDerecho);
 }
-void ArbolBinario::postOrden(pNodoBinario nodo){
-    if (nodo!= NULL){
-        postOrden(nodo->izquierda);
-        postOrden(nodo->derecha);
-        cout << nodo->dato <<" ";
-    }
+void ArbolBinario :: preOrden(NodoBinario* raiz)   // Recorriendo el árbol en pre-Orden
+{
+    if(raiz == NULL) return;
+    cout << raiz->elemento.CP << "\t";
+    preOrden(raiz->hijoIzquierdo);
+    preOrden(raiz->hijoDerecho);
 }
-void ArbolBinario::inOrden(pNodoBinario nodo){
-    if (nodo!= NULL){
-        inOrden(nodo->izquierda);
-        cout << nodo -> dato <<" ";
-        inOrden(nodo->derecha);
-    }
+void ArbolBinario :: postOrden(NodoBinario* raiz)   // Recorriendo el árbol en post-Orden
+{
+    if(raiz == NULL) return;
+    postOrden(raiz->hijoIzquierdo);
+    postOrden(raiz->hijoDerecho);
+    cout << raiz->elemento.CP << "\t";
 }

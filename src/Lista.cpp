@@ -6,7 +6,7 @@ Lista::Lista() {
     cabeza = NULL;
     actual = NULL;
     final = NULL;
-    }
+}
 Lista::~Lista() {
     pnodo aux;
     esPrimero();

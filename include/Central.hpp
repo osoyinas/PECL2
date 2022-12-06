@@ -12,5 +12,5 @@ struct Central {
     string localidad;
     Lista listaPaquetes;
 };
-Central crearCentral(string localidad, Lista listaPaquetes);
+Central crearCentral(string localidad);
 #endif // CENTRAL_H

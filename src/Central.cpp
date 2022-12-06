@@ -5,7 +5,7 @@ Central::Central()
     //ctor
 }
 void Central::addPaquete (Paquete paquete){
-    return ;
+    this->listaPaquetes.insertarNodo(paquete,'f');
 }
 string generarCP(){
 
@@ -17,11 +17,11 @@ string generarCP(){
     return CP;
 }
 
-Central crearCentral(string localidad, Lista listaPaquetes){
+Central crearCentral(string localidad){
     Central central;
     central.CP = generarCP();
     central.localidad = localidad;
-    central.listaPaquetes = listaPaquetes;
+    return central;
 }
 
 
