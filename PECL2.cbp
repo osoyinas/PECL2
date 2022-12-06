@@ -35,6 +35,7 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="include/ArbolBinario.hpp" />
+		<Unit filename="include/CAE.hpp" />
 		<Unit filename="include/Central.hpp" />
 		<Unit filename="include/CodigoId.hpp" />
 		<Unit filename="include/Coord.hpp" />
@@ -47,6 +48,7 @@
 		<Unit filename="include/Semicoord.hpp" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/ArbolBinario.cpp" />
+		<Unit filename="src/CAE.cpp" />
 		<Unit filename="src/Central.cpp" />
 		<Unit filename="src/CodigoId.cpp" />
 		<Unit filename="src/Coord.cpp" />
