@@ -33,6 +33,7 @@ NodoBinario* ArbolBinario :: buscarNodo(int id) {
 NodoBinario* ArbolBinario :: insertarNodo(NodoBinario* pRaiz, Central elemEnviado) {
     if(pRaiz == NULL)
     {
+        setRaiz(crearNodo(elemEnviado));
         return crearNodo(elemEnviado);
     }
     if(elemEnviado.ID < pRaiz->elemento.ID)
