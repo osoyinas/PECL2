@@ -1,4 +1,7 @@
 #include "CAE.hpp"
+#include "Central.hpp"
+
+using std::stoi;
 
 CAE::CAE(){
     vector<int> ids; //lista que almacena los IDS que identifican a los paquetes y las centrales.
@@ -23,7 +26,6 @@ CAE::CAE(){
     for (int i = 0; i < 100; i++){
 
         int random = generarRandom(0, 7);
-        cout<<random<<endl;
         Paquete paquete = generarPaquete(i,lmin,lmax,lomin,lomax, ids[random]); //creacion de un paquete.
         listaPaquetes.insertarNodo(paquete,'p');    //Inserccion del paquete al principio de la lista.
     }
@@ -45,7 +47,10 @@ void CAE::insertarPaquete(Paquete paquete){
     int idPaquete = paquete.CP;
 }
 void mostrar();
-void insertarCP(string CP, string localidad);
+void CAE :: insertarCP(string CP, string localidad){
+        Central centralInsertada = crearCentral(localidad, stoi(CP));
+        arbolCentrales.insertarNodo(arbolCentrales.getRaiz(), centralInsertada);
+}
 void borrarCP(string CP);
 void mostrarPaquetes(Central central);
 void buscarPaquete(string id);
