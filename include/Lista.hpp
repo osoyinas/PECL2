@@ -20,6 +20,7 @@ class Lista
         void esUltimo();
         bool esActual();
         Paquete getUlt();
+        void mostrar();
         Paquete valorActual();
 };
 

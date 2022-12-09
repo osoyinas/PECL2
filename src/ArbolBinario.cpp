@@ -4,6 +4,7 @@ NodoBinario* ArbolBinario :: crearNodo(Central elemEnviado) {
     NodoBinario* nuevoNodo = new NodoBinario();
     nuevoNodo->elemento = elemEnviado;
     nuevoNodo->izquierdo = nuevoNodo->derecho = NULL;
+    length++;
     return nuevoNodo;
 }
 NodoBinario* ArbolBinario :: getMin(NodoBinario* punteroRaiz) {
@@ -13,7 +14,22 @@ NodoBinario* ArbolBinario :: getMin(NodoBinario* punteroRaiz) {
     }
     return punteroRaiz;
 }
-
+NodoBinario* ArbolBinario :: buscarNodo(int id) {
+    NodoBinario* punteroRaiz = this->raiz;
+    while(punteroRaiz != NULL)
+    {
+        if(punteroRaiz->elemento.ID == id){
+            return punteroRaiz;
+        }
+        else if (punteroRaiz->elemento.ID < id){
+            punteroRaiz = punteroRaiz->derecho;
+        }
+        else if (punteroRaiz->elemento.ID >= id){
+            punteroRaiz = punteroRaiz->izquierdo;
+        }
+    }
+    return punteroRaiz;
+}
 NodoBinario* ArbolBinario :: insertarNodo(NodoBinario* pRaiz, Central elemEnviado) {
     if(pRaiz == NULL)
     {
@@ -26,6 +42,9 @@ NodoBinario* ArbolBinario :: insertarNodo(NodoBinario* pRaiz, Central elemEnviad
     if(elemEnviado.ID > pRaiz->elemento.ID)
     {
         pRaiz->derecho = insertarNodo(pRaiz->derecho, elemEnviado);
+    }
+    if(pRaiz->elemento.ID == elemEnviado.ID){
+        length++;
     }
     return pRaiz;
 }
@@ -77,9 +96,11 @@ void ArbolBinario :: inOrden(NodoBinario* raiz) {
         return;
     }
     inOrden(raiz->izquierdo);
-    cout << raiz->elemento.ID << "\t";
+    cout << raiz->elemento.ID << "\n";
+    raiz->elemento.listaPaquetes.mostrar();
     inOrden(raiz->derecho);
 }
+
 void ArbolBinario :: preOrden(NodoBinario* raiz) {
     if(raiz == NULL) return;
     cout << raiz->elemento.ID << "\n";
@@ -96,3 +117,5 @@ void ArbolBinario :: postOrden(NodoBinario* raiz)
     postOrden(raiz->derecho);
     cout << raiz->elemento.ID << "  "<<raiz->elemento.localidad<< "\n";
 }
+
+

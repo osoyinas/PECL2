@@ -12,8 +12,7 @@ using namespace std;
 class CAE
 {
 public:
-    CAE();
-    void setData(int,int,int);
+    CAE(int N1, int N2, int N3, int N4);
     Lista listaPaquetes;
     ArbolBinario arbolCentrales;
     void insertarPaquete(Paquete);
@@ -31,6 +30,7 @@ private:
     int N1;
     int N2;
     int N3;
+    int N4;
     const char *localidades[14] = {
                                    "Ajalvir",
                                    "Daganzo",

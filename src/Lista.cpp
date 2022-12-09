@@ -124,6 +124,9 @@ void Lista::esUltimo() {
 bool Lista::esActual() {
     return actual != NULL;
 }
+void Lista::mostrar(){
+    cout<<"jiji"<<endl;
+}
 
 Paquete Lista::valorActual() {
     if (!listaVacia()) return actual->valor;

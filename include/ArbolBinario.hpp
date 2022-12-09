@@ -17,6 +17,7 @@ public:
     NodoBinario* crearNodo(Central);
     NodoBinario* insertarNodo(NodoBinario*, Central);
     NodoBinario* borrarNodo(NodoBinario*, Central);
+    NodoBinario* buscarNodo(int id);
     void inOrden(NodoBinario*);
     void preOrden(NodoBinario*);
     void postOrden(NodoBinario*);
@@ -27,6 +28,6 @@ public:
     void setRaiz(NodoBinario* nodo) {
         raiz = nodo;
     }
+    int length = 0;
 };
-
 #endif // ARBOLBINARIO_HPP
