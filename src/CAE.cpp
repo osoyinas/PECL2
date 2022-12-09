@@ -11,7 +11,6 @@ CAE::CAE(){
     for (int i = 0; i < 10; i++){
         int id = generarID(); //Se genera un ID
         ids.push_back(id);
-        cout<<"entrado"<<endl;
         Central central = crearCentral(localidades[i], id); //Creacion de la central.
         if(i == 0){
             arbolCentrales.setRaiz(arbolCentrales.crearNodo(central)); //se establece la raiz del arbol.
@@ -20,13 +19,11 @@ CAE::CAE(){
             arbolCentrales.insertarNodo(arbolCentrales.getRaiz(), central); //se inserta la central en el arbol.
         }
     }
-    cout<< "EJE "<<ids.size() <<endl;
     //Generacion de paquetes
     for (int i = 0; i < 100; i++){
 
-        int random = generarRandom(0, 2);
+        int random = generarRandom(0, 7);
         cout<<random<<endl;
-        cout << "ASDASD"<<endl;
         Paquete paquete = generarPaquete(i,lmin,lmax,lomin,lomax, ids[random]); //creacion de un paquete.
         listaPaquetes.insertarNodo(paquete,'p');    //Inserccion del paquete al principio de la lista.
     }
