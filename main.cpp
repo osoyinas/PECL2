@@ -25,4 +25,3 @@ int main()
     cae.setData(N1, N2, N3);
     return 0;
 }
-
