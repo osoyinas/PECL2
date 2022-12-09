@@ -22,11 +22,10 @@ int main()
     //establecerSemilla();
     //Constantes
     CAE cae(N1,N2,N3,N4);
-    cae.arbolCentrales.inOrden(cae.arbolCentrales.getRaiz());
-    Central centralActual;
+    cout<<cae.arbolCentrales.length<<endl;
+    cae.arbolCentrales.postOrden(cae.arbolCentrales.getRaiz());
     NodoBinario* nodo = cae.arbolCentrales.buscarNodo(42);
     cout<<endl<<nodo->elemento.ID<<endl;
     cout<<cae.arbolCentrales.length<<endl;
-
     return 0;
 }

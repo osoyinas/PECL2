@@ -33,7 +33,6 @@ NodoBinario* ArbolBinario :: buscarNodo(int id) {
 NodoBinario* ArbolBinario :: insertarNodo(NodoBinario* pRaiz, Central elemEnviado) {
     if(pRaiz == NULL)
     {
-        setRaiz(crearNodo(elemEnviado));
         return crearNodo(elemEnviado);
     }
     if(elemEnviado.ID < pRaiz->elemento.ID)
@@ -96,9 +95,8 @@ void ArbolBinario :: inOrden(NodoBinario* raiz) {
     if(raiz == NULL) {
         return;
     }
-    inOrden(raiz->izquierdo);
     cout << raiz->elemento.ID << "\n";
-    raiz->elemento.listaPaquetes.mostrar();
+    inOrden(raiz->izquierdo);
     inOrden(raiz->derecho);
 }
 
