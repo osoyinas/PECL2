@@ -18,4 +18,5 @@ struct Central {
 };
 Central crearCentral(string localidad, int ID);
 int generarID();
+string getID(int cp);
 #endif // CENTRAL_H

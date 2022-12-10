@@ -20,5 +20,3 @@ int generarID(){
     random = generarRandom(1,9999);
     return random;
 }
-
-

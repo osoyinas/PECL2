@@ -17,11 +17,15 @@ public:
     NodoBinario* crearNodo(Central);
     NodoBinario* insertarNodo(NodoBinario*, Central);
     NodoBinario* borrarNodo(NodoBinario*, Central);
+    void borrarNodo (int dat);
     NodoBinario* buscarNodo(int id);
     void inOrden(NodoBinario*);
     void preOrden(NodoBinario*);
     void postOrden(NodoBinario*);
+    void mostrarCentrales(NodoBinario* raiz);
+    bool esHoja(NodoBinario* nodo) { return !nodo->derecho && !nodo->izquierdo; }
     NodoBinario* getMin(NodoBinario*);
+
     NodoBinario* getRaiz() {
         return raiz;
     }

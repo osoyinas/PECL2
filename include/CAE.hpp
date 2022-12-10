@@ -20,13 +20,17 @@ public:
     void mostrar();
     void insertarCP(string CP, string localidad);
     void borrarCP(string CP);
-    void mostrarPaquetes(Central central);
     void buscarPaquete(string id);
-    void eliminarPaquete(string id);
     void transferirPaquete(string id, string origenCP, string destinoCP);
+    int getPaquetesEnviados();
+    void resetPaquetesEnviados();
+    bool tienePaquetes();
+    void examinarCP();
+    void estadistica();
 
 
 private:
+    int paquetesEnviados = 0;
     int N1;
     int N2;
     int N3;

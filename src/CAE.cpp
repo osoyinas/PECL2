@@ -35,29 +35,50 @@ CAE::CAE(int N1, int N2, int N3, int N4){
     }
 }
 void CAE::insertarPaquetes() {
-
+    int iteraciones;
+    if (listaPaquetes.len<N3){
+        iteraciones = listaPaquetes.len;
+    }
+    else{
+        iteraciones = N3;
+    }
     for (int i = 0; i<N3; i++){
-        Paquete pq = listaPaquetes.getUlt(); // Ultimo paquete
-        listaPaquetes.borrarNodo('f'); //Eliminacion del ultimo paquete
-        insertarPaquete(pq);
+        if(tienePaquetes()){
+            Paquete pq = listaPaquetes.getUlt(); // Ultimo paquete
+            listaPaquetes.borrarNodo('f'); //Eliminacion del ultimo paquete
+            insertarPaquete(pq);
+        }
     }
 }
+
 void CAE::insertarPaquete(Paquete paquete){
+    paquetesEnviados++;
     int idPaquete = paquete.CP;
     arbolCentrales.buscarNodo(idPaquete)->elemento.addPaquete(paquete);
 }
-void CAE::mostrar(){
-    cout<<"--------Lista Inicial de paquetes--------"<<endl;
-    for (int i = 0; i <= this->arbolCentrales.length; i++){
 
-    }
+void CAE::mostrar(){
+    arbolCentrales.mostrarCentrales(arbolCentrales.getRaiz());
 }
+
+
 void CAE :: insertarCP(string CP, string localidad){
         Central centralInsertada = crearCentral(localidad, stoi(CP));
         arbolCentrales.insertarNodo(arbolCentrales.getRaiz(), centralInsertada);
 }
-void borrarCP(string CP);
-void mostrarPaquetes(Central central);
-void buscarPaquete(string id);
-void eliminarPaquete(string id);
-void transferirPaquete(string id, string origenCP, string destinoCP);
+
+bool CAE :: tienePaquetes(){
+    return listaPaquetes.len>0;
+}
+int CAE :: getPaquetesEnviados(){
+    return paquetesEnviados;
+}
+void CAE :: resetPaquetesEnviados(){
+    paquetesEnviados = 0;
+}
+void examinarCP(){
+    cout<<"Examinar"<<endl;
+}
+void estadistica() {
+
+}

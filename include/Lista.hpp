@@ -1,7 +1,9 @@
 #ifndef LISTA_HPP
 #define LISTA_HPP
 
+#include <iomanip>
 #include "NodoLista.hpp"
+
 using namespace std;
 class Lista
 {
@@ -22,6 +24,7 @@ class Lista
         Paquete getUlt();
         void mostrar();
         Paquete valorActual();
+        int len = 0;
 };
 
 #endif // LISTA_HPP

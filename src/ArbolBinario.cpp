@@ -21,14 +21,20 @@ NodoBinario* ArbolBinario :: buscarNodo(int id) {
         if(punteroRaiz->elemento.ID == id){
             return punteroRaiz;
         }
-        else if (punteroRaiz->elemento.ID < id){
+        else if (punteroRaiz->elemento.ID < id && punteroRaiz->derecho != NULL){
             punteroRaiz = punteroRaiz->derecho;
         }
-        else if (punteroRaiz->elemento.ID >= id){
+        else if (punteroRaiz->elemento.ID >= id && punteroRaiz->izquierdo!= NULL){
             punteroRaiz = punteroRaiz->izquierdo;
         }
+        else {
+            cout<<"No esta"<<endl;
+            return punteroRaiz;
+        }
     }
-    return punteroRaiz;
+    if(punteroRaiz != NULL){
+        return punteroRaiz;
+    }
 }
 NodoBinario* ArbolBinario :: insertarNodo(NodoBinario* pRaiz, Central elemEnviado) {
     if(pRaiz == NULL)
@@ -48,7 +54,7 @@ NodoBinario* ArbolBinario :: insertarNodo(NodoBinario* pRaiz, Central elemEnviad
     }
     return pRaiz;
 }
-NodoBinario* ArbolBinario :: borrarNodo(NodoBinario* pRaiz, Central elemEnviado) {
+NodoBinario* ArbolBinario::borrarNodo(NodoBinario* pRaiz, Central elemEnviado) {
     if(pRaiz == NULL)
     {
         cout << "\n El Nodo que no existe" << endl;
@@ -108,7 +114,6 @@ void ArbolBinario :: preOrden(NodoBinario* raiz) {
 }
 void ArbolBinario :: postOrden(NodoBinario* raiz)
 {
-
     if(raiz == NULL) {
     return;
     }
@@ -116,5 +121,15 @@ void ArbolBinario :: postOrden(NodoBinario* raiz)
     postOrden(raiz->derecho);
     cout << raiz->elemento.ID << "  "<<raiz->elemento.localidad<< "\n";
 }
-
+void ArbolBinario :: mostrarCentrales(NodoBinario* raiz){
+    if(raiz == NULL) {
+    return;
+    }
+    mostrarCentrales(raiz->izquierdo);
+    mostrarCentrales(raiz->derecho);
+    cout << "***********************************************************************"<<endl;
+    cout <<"CP ->"<<getID(raiz->elemento.ID) << "\t"<<"Localidad -> "<<raiz->elemento.localidad<< "\n";
+    cout << "\n";
+    raiz->elemento.listaPaquetes.mostrar();
+}
 

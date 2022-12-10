@@ -2,6 +2,16 @@
 const int ASCENDENTE=0;
 const int DESCENDENTE=1;
 
+string getID(int cp){
+
+    string str = "";
+    for(int i = 0; i < 4 - int(to_string(cp).size()) ; i++){
+        str+="0";
+    }
+    str+=to_string(cp);
+    return str;
+}
+
 Lista::Lista() {
     cabeza = NULL;
     actual = NULL;
@@ -20,6 +30,7 @@ Lista::~Lista() {
     final=NULL;
 }
 void Lista::insertarNodo(Paquete v, char c) {
+    len++;
     pnodo aux;
     char tipoInsercion;
     tipoInsercion=c;
@@ -50,6 +61,7 @@ void Lista::borrarNodo(char c) {
             aux=final;
             cabeza = final = NULL;
             aux=NULL;
+            len--;
             delete aux;
         }
         else {
@@ -57,6 +69,7 @@ void Lista::borrarNodo(char c) {
             final=final->anterior;
             aux->anterior=NULL;
             final->siguiente=NULL;
+            len--;
             delete aux;
         }
     }
@@ -66,6 +79,7 @@ void Lista::borrarNodo(char c) {
             aux=cabeza;
                 cabeza = final = NULL;
                 aux=NULL;
+                len--;
                 delete aux;
             }
         else {
@@ -73,17 +87,19 @@ void Lista::borrarNodo(char c) {
             cabeza=cabeza->siguiente;
             aux->siguiente=NULL;
             cabeza->anterior=NULL;
+            len--;
             delete aux;
         }
     }
 }
 void Lista::recorrerLista (int orden) {
     pnodo aux;
+    cout <<setw(7)<<"ID"<<setw(15)<<"NIF"<<setw(25)<<"Coordenadas" <<setw(15)<<"CP"<< endl;
     if (orden == ASCENDENTE) {
         esPrimero();
         aux = cabeza;
         while(aux) {
-            cout << getCodigoIdStr(aux->valor.id)<< "-> ";
+            cout << setw(7)<<getCodigoIdStr(aux->valor.id)<<setw(15)<<getNifStr(aux->valor.nif)<<setw(25)<<getCoordenadaStr(aux->valor.coords)<<setw(15)<<getID(aux->valor.CP) <<endl;
             aux = aux->siguiente;
         }
     }
@@ -91,7 +107,8 @@ void Lista::recorrerLista (int orden) {
         esUltimo();
         aux = final;
         while(aux) {
-            cout << getCodigoIdStr(aux->valor.id) << "-> "; aux = aux->anterior;
+            cout << setw(7)<<getCodigoIdStr(aux->valor.id)<<setw(15)<<getNifStr(aux->valor.nif)<<setw(25)<<getCoordenadaStr(aux->valor.coords)<<setw(15)<<getID(aux->valor.CP)<<endl;
+            aux = aux->anterior;
         }
     }
     cout << endl;
@@ -125,9 +142,11 @@ bool Lista::esActual() {
     return actual != NULL;
 }
 void Lista::mostrar(){
-    cout<<"jiji"<<endl;
+    recorrerLista(0);
 }
 
 Paquete Lista::valorActual() {
     if (!listaVacia()) return actual->valor;
 }
+
+
