@@ -23,7 +23,9 @@ public:
     void preOrden(NodoBinario*);
     void postOrden(NodoBinario*);
     void mostrarCentrales(NodoBinario* raiz);
+    void mostrarEstadistica(NodoBinario* raiz);
     bool esHoja(NodoBinario* nodo) { return !nodo->derecho && !nodo->izquierdo; }
+    void buscarPaquete(NodoBinario*raiz,string ID);
     NodoBinario* getMin(NodoBinario*);
 
     NodoBinario* getRaiz() {

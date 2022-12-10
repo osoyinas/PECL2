@@ -68,17 +68,41 @@ void CAE :: insertarCP(string CP, string localidad){
 }
 
 bool CAE :: tienePaquetes(){
-    return listaPaquetes.len>0;
+    return listaPaquetes.len > 0;
 }
+
 int CAE :: getPaquetesEnviados(){
     return paquetesEnviados;
 }
+
 void CAE :: resetPaquetesEnviados(){
     paquetesEnviados = 0;
 }
-void examinarCP(){
-    cout<<"Examinar"<<endl;
-}
-void estadistica() {
 
+void CAE:: examinarCP(string CP){
+    cout << "***********************************************************************"<<endl;
+    cout <<"CP ->"<<getID(arbolCentrales.buscarNodo(stoi(CP))->elemento.ID) << "\t"<<"Localidad -> "<<arbolCentrales.buscarNodo(stoi(CP))->elemento.localidad<< "\n";
+    cout << "\n";
+    arbolCentrales.buscarNodo(stoi(CP))->elemento.listaPaquetes.mostrar();
+    cin.get();
+}
+
+void CAE:: borrarCP(string CP){
+
+}
+
+void CAE:: buscarPaquete(string ID){
+    arbolCentrales.buscarPaquete(arbolCentrales.getRaiz(), ID);
+    cin.get();
+}
+void CAE:: extraer(string ID, string CP){
+
+}
+void CAE:: llevar(string ID,string CP){
+
+}
+void CAE::estadistica() {
+    cout<<"Centrales: "<< arbolCentrales.length<<endl;
+    arbolCentrales.mostrarEstadistica(arbolCentrales.getRaiz());
+    cin.get();
 }

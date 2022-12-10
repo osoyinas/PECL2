@@ -8,7 +8,7 @@
 #include "CAE.hpp"
 
 #define sistema 0   //linux/mac = 1, windows = 0.
-#define N1 14       //Centrales de paqueteria.
+#define N1 3       //Centrales de paqueteria.
 #define N2 100      //Paquetes generados aleatoriamente.
 #define N3 12       //Paquetes a enviar en cada ejecucion.
 #define N4 6*N3     //Cada cuantos paquetes mostrar el menu.
@@ -26,11 +26,8 @@ int main()
 
     //int opcion = menu();
     while(cae.tienePaquetes()){
-        cout<<"------------------------------------------------------------------------------------"<<endl;
         cae.mostrar();
-        cout<<endl<<"Pulsa ENTER para avanzar."<<endl;
         cae.insertarPaquetes();
-        input = cin.get();
         if(cae.getPaquetesEnviados()== N4){
             cae.resetPaquetesEnviados();
 
@@ -44,62 +41,74 @@ int main()
                     cin>>localidad;
                     cae.insertarCP(CP,localidad);
                     cout<<endl;
-                } break;
+                    break;
+                }
                 case 2: {
                     string CP;
                     cout<<"Inserte la CP que quiere eliminar: ";
                     cin>> CP;
                     cae.borrarCP(CP);
-                } break;
+                    break;
+                }
                 case 3: {
                     string CP;
                     cout<<"Inserte la CP que desea examinar: ";
                     cin>> CP;
                     cae.examinarCP(CP);
-                    } break;
+                    break;
+                    }
                 case 4: {
                     cae.estadistica();
-                } break;
+                    break;
+                }
                 case 5: {
                     string id;
                     cout<<"Inserte el codigo ID del paquete: ";
                     cin>> id;
-                    cae.buscarPaquete();
-                } break;
+                    cae.buscarPaquete(id);
+                    break;
+                }
                 case 6: {
                     string CP;
                     string ID;
                     cout<<"Inserte la CP: ";
                     cin>> CP;
                     cout <<"Inserte el ID del paquete: ";
-                    cin >> ID:
+                    cin >> ID;
                     cae.extraer(ID,CP);
-                } break;
+                    break;
+                }
                 case 7: {
                     string CP;
                     string ID;
                     cout<<"Inserte la CP: ";
                     cin>> CP;
                     cout <<"Inserte el ID del paquete: ";
-                    cin >> ID:
+                    cin >> ID;
                     cae.llevar(ID,CP);
-                } break;
+                    break;
+                }
                 case 8: {
                     string CPOrigen;
                     string CPDestino;
                     cout<<"Inserte la CP origen: ";
                     cin>> CPOrigen;
                     cout <<"Inserte la CP destino: ";
-                    cin >> CPDestino:
+                    cin >> CPDestino;
                     cae.llevar(CPOrigen,CPDestino);
-                } break;
+                    break;
+                }
                 case 9: {
-                } break;
+                    cout<<"CACA"<<endl;
+                    break;
+                }
                 case 0: {
                     return 0;
                 } break;
             }
         }
+        cout<<endl<<"Pulsa ENTER para avanzar."<<endl;
+        input = cin.get();
     }
 }
 

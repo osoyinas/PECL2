@@ -39,3 +39,16 @@ CodigoId generarCodigoId(int n){
     cId.secN = n+1;
     return cId;
 }
+CodigoId crearCodigoId(string str){
+
+    CodigoId cId;
+    for(int i = 0; i < int(strlen(cId.rdigitos)); i++ ){
+        char digito = generarRandom(48,57);
+        cId.rdigitos[i] = str[i];
+    }
+    char letra = generarRandom(65,90);
+    cId.letra = str[2];
+    string substr = str.substr(3,6);
+    cId.secN = stoi(substr);
+    return cId;
+}

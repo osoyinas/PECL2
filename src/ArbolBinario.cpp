@@ -101,8 +101,9 @@ void ArbolBinario :: inOrden(NodoBinario* raiz) {
     if(raiz == NULL) {
         return;
     }
-    cout << raiz->elemento.ID << "\n";
+
     inOrden(raiz->izquierdo);
+    cout << raiz->elemento.ID << "\n";
     inOrden(raiz->derecho);
 }
 
@@ -112,14 +113,21 @@ void ArbolBinario :: preOrden(NodoBinario* raiz) {
     preOrden(raiz->izquierdo);
     preOrden(raiz->derecho);
 }
-void ArbolBinario :: postOrden(NodoBinario* raiz)
-{
+void ArbolBinario :: postOrden(NodoBinario* raiz) {
     if(raiz == NULL) {
     return;
     }
     postOrden(raiz->izquierdo);
     postOrden(raiz->derecho);
     cout << raiz->elemento.ID << "  "<<raiz->elemento.localidad<< "\n";
+}
+void ArbolBinario :: mostrarEstadistica(NodoBinario* raiz){
+    if(raiz == NULL) {
+        return;
+    }
+    mostrarEstadistica(raiz->izquierdo);
+    mostrarEstadistica(raiz->derecho);
+    cout << "ID: "<<raiz->elemento.ID<<"  Localidad: "<<raiz->elemento.localidad<< "  Paquetes: "<< raiz->elemento.listaPaquetes.len <<endl;
 }
 void ArbolBinario :: mostrarCentrales(NodoBinario* raiz){
     if(raiz == NULL) {
@@ -131,5 +139,28 @@ void ArbolBinario :: mostrarCentrales(NodoBinario* raiz){
     cout <<"CP ->"<<getID(raiz->elemento.ID) << "\t"<<"Localidad -> "<<raiz->elemento.localidad<< "\n";
     cout << "\n";
     raiz->elemento.listaPaquetes.mostrar();
+}
+void ArbolBinario :: buscarPaquete(NodoBinario* raiz,string ID){
+    if(raiz == NULL){
+        return;
+    }
+    if(getCodigoIdStr(raiz->elemento.listaPaquetes.buscarNodo(ID).id) == ID){
+        cout <<setw(7)<<"ID"<<setw(15)<<"NIF"<<setw(25)<<"Coordenadas" <<setw(15)<<"CP"<< endl;
+        cout << setw(7)<<getCodigoIdStr(raiz->elemento.listaPaquetes.buscarNodo(ID).id)<<setw(15)
+        <<getNifStr(raiz->elemento.listaPaquetes.buscarNodo(ID).nif)<<setw(25)<<getCoordenadaStr(raiz->elemento.listaPaquetes.buscarNodo(ID).coords)
+        <<setw(15)<<getID(raiz->elemento.listaPaquetes.buscarNodo(ID).CP) <<endl;
+    }
+    else{
+        if(!esHoja(raiz)){
+            if(raiz->izquierdo){
+                buscarPaquete(raiz->izquierdo,ID);
+            }
+            if(raiz->derecho){
+                buscarPaquete(raiz->derecho,ID);
+            }
+
+        }
+
+    }
 }
 

@@ -113,6 +113,17 @@ void Lista::recorrerLista (int orden) {
     }
     cout << endl;
 }
+Paquete Lista::buscarNodo(string ID){
+    pnodo aux=NULL;
+    esPrimero();
+    aux = cabeza;
+    while(aux) {
+        if(getCodigoIdStr(aux->valor.id) == ID){
+            return aux->valor;
+        }
+        aux = aux->siguiente;
+    }
+}
 Paquete Lista::getUlt(){
 
     return final->valor;

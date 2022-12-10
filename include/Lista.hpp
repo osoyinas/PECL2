@@ -21,6 +21,7 @@ class Lista
         void esPrimero();
         void esUltimo();
         bool esActual();
+        Paquete buscarNodo(string ID);
         Paquete getUlt();
         void mostrar();
         Paquete valorActual();
