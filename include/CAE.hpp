@@ -7,6 +7,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <cctype>
 
 using namespace std;
 class CAE
@@ -29,6 +30,8 @@ public:
     void buscarPaquete();
     void extraer(string, string);
     void llevar(string, string);
+    void llevar(string, string, string);
+
 
     void estadistica();
 

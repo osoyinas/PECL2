@@ -8,8 +8,8 @@
 #include "CAE.hpp"
 
 #define sistema 0   //linux/mac = 1, windows = 0.
-#define N1 1       //Centrales de paqueteria.
-#define N2 200      //Paquetes generados aleatoriamente.
+#define N1 10       //Centrales de paqueteria.
+#define N2 300      //Paquetes generados aleatoriamente.
 #define N3 12       //Paquetes a enviar en cada ejecucion.
 #define N4 6*N3     //Cada cuantos paquetes mostrar el menu.
 
@@ -21,14 +21,14 @@ int main()
 {
     //establecerSemilla();
     //Constantes
-    int input;
     CAE cae(N1,N2,N3,N4);
-
-    //int opcion = menu();
-    while(cae.tienePaquetes()){
-        cae.mostrar();
+    cae.mostrar();
+    cout<<endl<<"Pulsa ENTER para avanzar.";
+    cin.get();
+    while(1){
         cae.insertarPaquetes();
-        if(cae.getPaquetesEnviados()== N4){
+        cae.mostrar();
+        if(cae.getPaquetesEnviados()== N4 || !cae.tienePaquetes()){
             cae.resetPaquetesEnviados();
 
             switch (menu()){
@@ -81,21 +81,24 @@ int main()
                 case 7: {
                     string CP;
                     string ID;
-                    cout<<"Inserte la CP: ";
-                    cin>> CP;
                     cout <<"Inserte el ID del paquete: ";
                     cin >> ID;
+                    cout<<"Inserte la CP donde desea insertar el paquete: ";
+                    cin>> CP;
                     cae.llevar(ID,CP);
                     break;
                 }
                 case 8: {
                     string CPOrigen;
                     string CPDestino;
+                    string ID;
                     cout<<"Inserte la CP origen: ";
                     cin>> CPOrigen;
                     cout <<"Inserte la CP destino: ";
                     cin >> CPDestino;
-                    cae.llevar(CPOrigen,CPDestino);
+                    cout <<"Inserte el paquete de la CP "<<CPOrigen<<": ";
+                    cin >> ID;
+                    cae.llevar(CPOrigen,CPDestino, ID);
                     break;
                 }
                 case 9: {
@@ -106,8 +109,8 @@ int main()
                 } break;
             }
         }
-        cout<<endl<<"Pulsa ENTER para avanzar."<<endl;
-        input = cin.get();
+        cout<<endl<<"Pulsa ENTER para avanzar.";
+        cin.get();
     }
 }
 

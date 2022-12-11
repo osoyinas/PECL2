@@ -142,6 +142,14 @@ void Lista::borrarPaquete(string ID){
         cout<<"No existe el paquete paquete indicado"<<endl;
         return;
     }
+    if(getCodigoIdStr(cabeza->valor.id) == ID){
+        borrarNodo('p');
+        return;
+    }
+    else if(getCodigoIdStr(final->valor.id) == ID){
+        borrarNodo('f');
+        return;
+    }
     pnodo aux = NULL;
     aux = buscarNodo(ID);
     pnodo auxSiguiente = aux->siguiente;
