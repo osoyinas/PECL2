@@ -54,36 +54,29 @@ NodoBinario* ArbolBinario :: insertarNodo(NodoBinario* pRaiz, Central elemEnviad
     }
     return pRaiz;
 }
-NodoBinario* ArbolBinario::borrarNodo(NodoBinario* pRaiz, Central elemEnviado) {
-    if(pRaiz == NULL)
-    {
+NodoBinario* ArbolBinario::borrarNodo(NodoBinario* pRaiz, int id) {
+    if(pRaiz == NULL) {
         cout << "\n El Nodo que no existe" << endl;
-        return pRaiz;
     }
-    else if(elemEnviado.ID < pRaiz->elemento.ID)
-    {
-        pRaiz->izquierdo = borrarNodo(pRaiz->izquierdo, elemEnviado);
+    else if(id < pRaiz->elemento.ID) {
+        pRaiz->izquierdo = borrarNodo(pRaiz->izquierdo, id);
     }
-    else if(elemEnviado.ID > pRaiz->elemento.ID)
-    {
-        pRaiz->derecho = borrarNodo(pRaiz->derecho, elemEnviado);
+    else if(id > pRaiz->elemento.ID) {
+        pRaiz->derecho = borrarNodo(pRaiz->derecho, id);
     }
-    else
-    {
-        if(pRaiz->izquierdo == NULL && pRaiz->derecho == NULL)
-        {
-            delete pRaiz;
+    else {
+        if(pRaiz->izquierdo == NULL && pRaiz->derecho == NULL) {
             pRaiz = NULL;
+            delete pRaiz;
         }
-        else if(raiz->izquierdo == NULL)
-        {
-            struct NodoBinario* tempo = pRaiz;
+        else if(raiz->izquierdo == NULL) {
+            NodoBinario* tempo = pRaiz;
             pRaiz = pRaiz->derecho;
             delete tempo;
         }
         else if(pRaiz->derecho == NULL)
         {
-            struct NodoBinario* tempo = pRaiz;
+            NodoBinario* tempo = pRaiz;
             pRaiz = pRaiz->izquierdo;
             delete tempo;
         }
@@ -91,10 +84,47 @@ NodoBinario* ArbolBinario::borrarNodo(NodoBinario* pRaiz, Central elemEnviado) {
         {
             NodoBinario* tempo = getMin(pRaiz->derecho);
             pRaiz->elemento = tempo->elemento;
-            pRaiz->izquierdo = borrarNodo(pRaiz->derecho, tempo->elemento);
+            pRaiz->izquierdo = borrarNodo(pRaiz->derecho, tempo->elemento.ID);
         }
     }
     return pRaiz;
+    }
+    /*
+        if(pRaiz == NULL) {
+            cout << "\n El Nodo que no existe" << endl;
+            return;
+        }
+        if(esHoja(pRaiz)){
+            pRaiz = NULL;
+            delete pRaiz;
+        }
+        if (pRaiz->derecho && pRaiz->izquierdo){
+            NodoBinario* aux;
+            Nodobinario* padreAux;
+            aux = getMin(pRaiz->derecho);
+            padreAux = getPadre(raiz, aux);
+            padreAux->izquierdo = NULL;
+            getPadre(raiz,pRaiz)->derecho
+
+        }
+        else if(pRaiz->derecho){
+
+        }
+        else if (pRaiz->izquierdo){
+
+        }*/
+
+NodoBinario* ArbolBinario :: getPadre(NodoBinario* raiz, NodoBinario* hijo) {
+    if(raiz == NULL) {
+        return NULL;
+    }
+    if(raiz->derecho == hijo || raiz->izquierdo == hijo){
+        return raiz;
+    }
+    else{
+        getPadre(raiz->izquierdo, hijo);
+        getPadre(raiz->derecho, hijo);
+    }
 }
 
 void ArbolBinario :: inOrden(NodoBinario* raiz) {
@@ -121,14 +151,18 @@ void ArbolBinario :: postOrden(NodoBinario* raiz) {
     postOrden(raiz->derecho);
     cout << raiz->elemento.ID << "  "<<raiz->elemento.localidad<< "\n";
 }
-void ArbolBinario :: mostrarEstadistica(NodoBinario* raiz){
+void ArbolBinario :: mostrarEstadistica(NodoBinario* raiz, int N2){
     if(raiz == NULL) {
         return;
     }
-    mostrarEstadistica(raiz->izquierdo);
-    mostrarEstadistica(raiz->derecho);
-    cout << "ID: "<<getID(raiz->elemento.ID)<<"  Localidad: "<<raiz->elemento.localidad<< "  Paquetes: "<< raiz->elemento.listaPaquetes.len <<endl;
+    mostrarEstadistica(raiz->izquierdo, N2);
+    mostrarEstadistica(raiz->derecho, N2);
+    float p = (float)(raiz->elemento.listaPaquetes.len)*100/(float)N2;
+    float porcentaje = round(p*100)/100;
+    cout <<setfill(' ')<< setw(23) << raiz->elemento.localidad << "\t\t"<<getID(raiz->elemento.ID) << "\t\t"<< raiz->elemento.listaPaquetes.len  << "\t\t"<< porcentaje <<"%"<< endl;
 }
+
+
 void ArbolBinario :: mostrarCentrales(NodoBinario* raiz){
     if(raiz == NULL) {
     return;

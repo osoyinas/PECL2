@@ -42,7 +42,7 @@ void CAE::insertarPaquetes() {
     else{
         iteraciones = N3;
     }
-    for (int i = 0; i<N3; i++){
+    for (int i = 0; i<iteraciones; i++){
         if(tienePaquetes()){
             Paquete pq = listaPaquetes.getUlt(); // Ultimo paquete
             listaPaquetes.borrarNodo('f'); //Eliminacion del ultimo paquete
@@ -79,7 +79,7 @@ bool cp_valida(string CP){
       break;
     }
   }
-  return valida;
+  return valida && CP.size()==4;
 }
 void CAE :: insertarCP(string CP, string localidad){
 
@@ -87,10 +87,13 @@ void CAE :: insertarCP(string CP, string localidad){
     if(cp_valida(CP)){
         Central centralInsertada = crearCentral(localidad, stoi(CP));
         arbolCentrales.insertarNodo(arbolCentrales.getRaiz(), centralInsertada);
+        examinarCP(CP);
     }
     else{
         cout<<"Tiene que insertar un codigo de CP valido, 4 digitos"<<endl;
+
     }
+    cin.get();
 }
 
 bool CAE :: tienePaquetes(){
@@ -106,13 +109,22 @@ void CAE :: resetPaquetesEnviados(){
 }
 
 void CAE:: examinarCP(string CP){
-    cout <<"CP ->"<<getID(arbolCentrales.buscarNodo(stoi(CP))->elemento.ID) << "\t"<<"Localidad -> "<<arbolCentrales.buscarNodo(stoi(CP))->elemento.localidad<< "\n";
-    cout << "\n";
+    if(!cp_valida(CP)){
+        return;
+    }
+
+    cout <<"-----------------------------------------------------------------"<<endl;
+    cout <<getID(arbolCentrales.buscarNodo(stoi(CP))->elemento.ID)<<setw(60)<<arbolCentrales.buscarNodo(stoi(CP))->elemento.localidad<< endl;
+    cout <<"-----------------------------------------------------------------"<<endl;
     arbolCentrales.buscarNodo(stoi(CP))->elemento.listaPaquetes.mostrar();
-    cin.get();
+    cout <<"-----------------------------------------------------------------"<<endl;
 }
 
 void CAE:: borrarCP(string CP){
+    if(!cp_valida(CP)){
+        return;
+    }
+    arbolCentrales.borrarNodo(arbolCentrales.getRaiz(), stoi(CP));
 
 }
 
@@ -121,10 +133,16 @@ void CAE:: buscarPaquete(string ID){
     cin.get();
 }
 void CAE:: extraer(string ID, string CP){
+    if(!cp_valida(CP)){
+        return;
+    }
     arbolCentrales.buscarNodo(stoi(CP))->elemento.listaPaquetes.borrarPaquete(ID);
     cin.get();
 }
 void CAE:: llevar(string ID,string CP){
+    if(!cp_valida(CP)){
+        return;
+    }
     if(listaPaquetes.buscarNodo(ID)){
         Paquete paquete = listaPaquetes.buscarPaquete(ID);
         listaPaquetes.borrarPaquete(ID);
@@ -139,6 +157,9 @@ void CAE:: llevar(string ID,string CP){
 
 }
 void CAE:: llevar(string CPOrigen,string CPDestino, string ID){
+    if(!cp_valida(CPOrigen) || !cp_valida(CPDestino)){
+        return;
+    }
     if(arbolCentrales.buscarNodo(stoi(CPOrigen))->elemento.listaPaquetes.buscarNodo(ID)){ //comprueba si existe el paquete
         Paquete paquete = arbolCentrales.buscarNodo(stoi(CPOrigen))->elemento.listaPaquetes.buscarPaquete(ID); //seleccion del paquete de la central de origen
         arbolCentrales.buscarNodo(stoi(CPOrigen))->elemento.listaPaquetes.borrarPaquete(ID); //se borra el paquete de la central origen
@@ -152,7 +173,14 @@ void CAE:: llevar(string CPOrigen,string CPDestino, string ID){
     }
 }
 void CAE::estadistica() {
-    cout<<"Centrales: "<< arbolCentrales.length<<endl;
-    arbolCentrales.mostrarEstadistica(arbolCentrales.getRaiz());
+    cout <<endl<<"                                  ESTADISTICA"<<endl<<endl;
+    float p = (float)(N2 - listaPaquetes.len)*100/(float)N2;
+    float porcentaje = round(p*100)/100;
+    cout <<setfill(' ')<< setw(23) << "Localidad" << "\t\t"<<"CP" << "\t\t"<< "Paquetes" << "\t"<<"Paquetes(%)"<< endl;
+    cout<<"- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"<<endl;
+    arbolCentrales.mostrarEstadistica(arbolCentrales.getRaiz(), N2);
+    cout<<"- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"<<endl;
+    cout <<setfill(' ')<< setw(23) << "Total" << "\t\t"<< arbolCentrales.length <<"\t\t"<< N2 - listaPaquetes.len<<"/"<<N2 << "\t\t"<< porcentaje <<"%"<< endl;
+
     cin.get();
 }
