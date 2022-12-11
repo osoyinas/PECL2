@@ -28,7 +28,7 @@ NodoBinario* ArbolBinario :: buscarNodo(int id) {
             punteroRaiz = punteroRaiz->izquierdo;
         }
         else {
-            cout<<"No esta"<<endl;
+            cout<<"No existe la central indicada."<<endl;
             return punteroRaiz;
         }
     }
@@ -150,11 +150,11 @@ void ArbolBinario :: buscarPaquete(NodoBinario* raiz,string ID){
     if(raiz == NULL){
         return;
     }
-    if(getCodigoIdStr(raiz->elemento.listaPaquetes.buscarNodo(ID).id) == ID){
+    if(getCodigoIdStr(raiz->elemento.listaPaquetes.buscarPaquete(ID).id) == ID){
         cout <<setw(7)<<"ID"<<setw(15)<<"NIF"<<setw(25)<<"Coordenadas" <<setw(15)<<"CP"<< endl;
-        cout << setw(7)<<getCodigoIdStr(raiz->elemento.listaPaquetes.buscarNodo(ID).id)<<setw(15)
-        <<getNifStr(raiz->elemento.listaPaquetes.buscarNodo(ID).nif)<<setw(25)<<getCoordenadaStr(raiz->elemento.listaPaquetes.buscarNodo(ID).coords)
-        <<setw(15)<<getID(raiz->elemento.listaPaquetes.buscarNodo(ID).CP) <<endl;
+        cout << setw(7)<<getCodigoIdStr(raiz->elemento.listaPaquetes.buscarPaquete(ID).id)<<setw(15)
+        <<getNifStr(raiz->elemento.listaPaquetes.buscarPaquete(ID).nif)<<setw(25)<<getCoordenadaStr(raiz->elemento.listaPaquetes.buscarPaquete(ID).coords)
+        <<setw(15)<<getID(raiz->elemento.listaPaquetes.buscarPaquete(ID).CP) <<endl;
     }
     else{
         if(!esHoja(raiz)){

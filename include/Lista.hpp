@@ -21,7 +21,9 @@ class Lista
         void esPrimero();
         void esUltimo();
         bool esActual();
-        Paquete buscarNodo(string ID);
+        void borrarPaquete(string ID);
+        Paquete buscarPaquete(string ID);
+        pnodo buscarNodo(string ID);
         Paquete getUlt();
         void mostrar();
         Paquete valorActual();

@@ -34,17 +34,17 @@ void Lista::insertarNodo(Paquete v, char c) {
     pnodo aux;
     char tipoInsercion;
     tipoInsercion=c;
-    if(listaVacia()) { // Si la lista está vacía
+    if(listaVacia()) { // Si la lista estÃ¡ vacÃ­a
         aux = new NodoLista(v,NULL,NULL);
         final=cabeza=aux;
     }
-    else if (tipoInsercion=='f') {//Inserción por el final
+    else if (tipoInsercion=='f') {//InserciÃ³n por el final
         aux= new NodoLista(v,NULL,NULL);
         aux->anterior=final;
         final->siguiente=aux;
         final=aux;
     }
-    else if (tipoInsercion=='p') {//Inserción por el principio
+    else if (tipoInsercion=='p') {//InserciÃ³n por el principio
         aux= new NodoLista(v,NULL,NULL);
         aux->siguiente=cabeza;
         cabeza->anterior=aux;
@@ -55,9 +55,9 @@ void Lista::insertarNodo(Paquete v, char c) {
 void Lista::borrarNodo(char c) {
     char tipoBorrado;
     tipoBorrado=c;
-    if(tipoBorrado=='f') {//Eliminación por el final
+    if(tipoBorrado=='f') {//EliminaciÃ³n por el final
         pnodo aux=NULL;
-        if((cabeza==final)) { //Sólo hay elemento
+        if((cabeza==final)) { //SÃ³lo hay elemento
             aux=final;
             cabeza = final = NULL;
             aux=NULL;
@@ -73,9 +73,9 @@ void Lista::borrarNodo(char c) {
             delete aux;
         }
     }
-    else if(tipoBorrado=='p') {//Eliminación por el Principio
+    else if(tipoBorrado=='p') {//EliminaciÃ³n por el Principio
         pnodo aux=NULL;
-        if((cabeza==final)) {//Sólo hay elemento
+        if((cabeza==final)) {//SÃ³lo hay elemento
             aux=cabeza;
                 cabeza = final = NULL;
                 aux=NULL;
@@ -113,7 +113,19 @@ void Lista::recorrerLista (int orden) {
     }
     cout << endl;
 }
-Paquete Lista::buscarNodo(string ID){
+pnodo Lista::buscarNodo(string ID){
+    pnodo aux=NULL;
+    esPrimero();
+    aux = cabeza;
+    while(aux) {
+        if(getCodigoIdStr(aux->valor.id) == ID){
+            return aux;
+        }
+        aux = aux->siguiente;
+    }
+}
+Paquete Lista::buscarPaquete(string ID){
+
     pnodo aux=NULL;
     esPrimero();
     aux = cabeza;
@@ -124,6 +136,26 @@ Paquete Lista::buscarNodo(string ID){
         aux = aux->siguiente;
     }
 }
+
+void Lista::borrarPaquete(string ID){
+    if(!buscarNodo(ID)){
+        cout<<"No existe el paquete paquete indicado"<<endl;
+        return;
+    }
+    pnodo aux = NULL;
+    aux = buscarNodo(ID);
+    pnodo auxSiguiente = aux->siguiente;
+    pnodo auxAnterior = aux->anterior;
+    auxAnterior->siguiente = auxAnterior->siguiente->siguiente;
+    auxSiguiente->anterior = auxSiguiente->anterior->anterior;
+    aux->siguiente = NULL;
+    aux->anterior = NULL;
+    aux = auxSiguiente = auxAnterior = NULL;
+    delete aux;
+    delete auxSiguiente;
+    delete auxAnterior;
+}
+
 Paquete Lista::getUlt(){
 
     return final->valor;

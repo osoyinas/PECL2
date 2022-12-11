@@ -8,8 +8,8 @@
 #include "CAE.hpp"
 
 #define sistema 0   //linux/mac = 1, windows = 0.
-#define N1 3       //Centrales de paqueteria.
-#define N2 100      //Paquetes generados aleatoriamente.
+#define N1 1       //Centrales de paqueteria.
+#define N2 200      //Paquetes generados aleatoriamente.
 #define N3 12       //Paquetes a enviar en cada ejecucion.
 #define N4 6*N3     //Cada cuantos paquetes mostrar el menu.
 
@@ -99,7 +99,6 @@ int main()
                     break;
                 }
                 case 9: {
-                    cout<<"CACA"<<endl;
                     break;
                 }
                 case 0: {

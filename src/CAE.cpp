@@ -58,6 +58,7 @@ void CAE::insertarPaquete(Paquete paquete){
 }
 
 void CAE::mostrar(){
+    listaPaquetes.mostrar();
     arbolCentrales.mostrarCentrales(arbolCentrales.getRaiz());
 }
 
@@ -96,7 +97,7 @@ void CAE:: buscarPaquete(string ID){
     cin.get();
 }
 void CAE:: extraer(string ID, string CP){
-
+    arbolCentrales.buscarNodo(stoi(CP))->elemento.listaPaquetes.borrarPaquete(ID);
 }
 void CAE:: llevar(string ID,string CP){
 
