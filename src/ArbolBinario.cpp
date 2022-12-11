@@ -127,7 +127,7 @@ void ArbolBinario :: mostrarEstadistica(NodoBinario* raiz){
     }
     mostrarEstadistica(raiz->izquierdo);
     mostrarEstadistica(raiz->derecho);
-    cout << "ID: "<<raiz->elemento.ID<<"  Localidad: "<<raiz->elemento.localidad<< "  Paquetes: "<< raiz->elemento.listaPaquetes.len <<endl;
+    cout << "ID: "<<getID(raiz->elemento.ID)<<"  Localidad: "<<raiz->elemento.localidad<< "  Paquetes: "<< raiz->elemento.listaPaquetes.len <<endl;
 }
 void ArbolBinario :: mostrarCentrales(NodoBinario* raiz){
     if(raiz == NULL) {
@@ -135,10 +135,16 @@ void ArbolBinario :: mostrarCentrales(NodoBinario* raiz){
     }
     mostrarCentrales(raiz->izquierdo);
     mostrarCentrales(raiz->derecho);
-    cout << "***********************************************************************"<<endl;
-    cout <<"CP ->"<<getID(raiz->elemento.ID) << "\t"<<"Localidad -> "<<raiz->elemento.localidad<< "\n";
-    cout << "\n";
+    cout<<endl;
+    cout <<"-----------------------------------------------------------------"<<endl;
+    cout <<getID(raiz->elemento.ID)<<setw(60)<<raiz->elemento.localidad<< endl;
+    cout <<"-----------------------------------------------------------------"<<endl;
     raiz->elemento.listaPaquetes.mostrar();
+    cout <<"-----------------------------------------------------------------"<<endl;
+    cout<<endl;
+    cout<<endl;
+    cout<<endl;
+
 }
 void ArbolBinario :: buscarPaquete(NodoBinario* raiz,string ID){
     if(raiz == NULL){

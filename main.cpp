@@ -113,7 +113,7 @@ int main()
 }
 
 int menu(){
-    cout<<"----------------------------------------MENU----------------------------------------"<<endl;
+    cout <<"                               MENU                               "<<endl;
     cout<<"1. Insertar una CP de forma manual."<<endl;
     cout<<"2. Borrar una CP."<<endl;
     cout<<"3. Mostrar los datos de los paquetes que se distribuirán en una CP dada."<<endl;
@@ -124,7 +124,7 @@ int menu(){
     cout<<"8. Llevar un paquete concreto de una CP a otra."<<endl;
     cout<<"9. Continuar con la distribución de paquetes."<<endl;
     cout<<"0. Salir del programa."<<endl;
-    cout<<"------------------------------------------------------------------------------------"<<endl;
+    cout<<endl;
     int opcion;
     cout<<"Seleccione una opcion: ";
     cin >> opcion;
