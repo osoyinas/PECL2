@@ -54,67 +54,32 @@ NodoBinario* ArbolBinario :: insertarNodo(NodoBinario* pRaiz, Central elemEnviad
     }
     return pRaiz;
 }
-NodoBinario* ArbolBinario::borrarNodo(NodoBinario* pRaiz, int id) {
-    if(pRaiz == NULL) {
-        cout << "\n El Nodo que no existe" << endl;
-    }
-    else if(id < pRaiz->elemento.ID) {
-        pRaiz->izquierdo = borrarNodo(pRaiz->izquierdo, id);
-    }
-    else if(id > pRaiz->elemento.ID) {
-        pRaiz->derecho = borrarNodo(pRaiz->derecho, id);
-    }
-    else {
-        if(pRaiz->izquierdo == NULL && pRaiz->derecho == NULL) {
-            pRaiz = NULL;
-            delete pRaiz;
-        }
-        else if(raiz->izquierdo == NULL) {
-            NodoBinario* tempo = pRaiz;
-            pRaiz = pRaiz->derecho;
-            delete tempo;
-        }
-        else if(pRaiz->derecho == NULL)
-        {
-            NodoBinario* tempo = pRaiz;
-            pRaiz = pRaiz->izquierdo;
-            delete tempo;
-        }
-        else
-        {
-            NodoBinario* tempo = getMin(pRaiz->derecho);
-            pRaiz->elemento = tempo->elemento;
-            pRaiz->izquierdo = borrarNodo(pRaiz->derecho, tempo->elemento.ID);
-        }
-    }
-    return pRaiz;
-    }
-    /*
-        if(pRaiz == NULL) {
-            cout << "\n El Nodo que no existe" << endl;
-            return;
-        }
-        if(esHoja(pRaiz)){
-            pRaiz = NULL;
-            delete pRaiz;
-        }
-        if (pRaiz->derecho && pRaiz->izquierdo){
-            NodoBinario* aux;
-            Nodobinario* padreAux;
-            aux = getMin(pRaiz->derecho);
-            padreAux = getPadre(raiz, aux);
-            padreAux->izquierdo = NULL;
-            getPadre(raiz,pRaiz)->derecho
 
+NodoBinario* ArbolBinario::borrarNodo(NodoBinario* raiz, int elemEnviado) { // Para borrar el nodo donde esté el elemento enviado y reorganizar la raiz
+    if (raiz == NULL) return raiz; // Árbol vacío
+    if (elemEnviado < raiz->elemento.ID) // Busca el árbol y si el elemento enviado < raiz, avanza hacia el subárbol que esté a su izquierda
+        raiz->derecho = borrarNodo(raiz->izquierdo, elemEnviado);
+    else if (elemEnviado > raiz->elemento.ID) // Si el elemento enviado > raiz, avanza hacia el subárbol de la derecha
+        raiz->derecho = borrarNodo(raiz->derecho, elemEnviado);
+    else { // Si el elemento enviado es igual al de la raiz
+        if (raiz->izquierdo == NULL) { // Si el hijo izquierdo es un nodo vacío o con un sólo hijo.
+            NodoBinario* temp = raiz->derecho;
+            free(raiz);
+            return temp;
         }
-        else if(pRaiz->derecho){
-
+        else if (raiz->derecho == NULL) {
+            NodoBinario* temp = raiz->izquierdo;
+            free(raiz);
+            return temp;
         }
-        else if (pRaiz->izquierdo){
+        NodoBinario* temp = getMin(raiz->derecho); // Nodo con ambos hijos. Hallar al sucesor y borrar el nodo.
+        raiz->elemento = temp->elemento; // Copiar a este nodo el contenido del sucesor del recorrido
+        raiz->derecho = borrarNodo(raiz->derecho, temp->elemento.ID); // Borrar el sucesor del recorrido
+    }
+    return raiz;
+}
 
-        }*/
-
-NodoBinario* ArbolBinario :: getPadre(NodoBinario* raiz, NodoBinario* hijo) {
+NodoBinario* ArbolBinario::getPadre(NodoBinario* raiz, NodoBinario* hijo) {
     if(raiz == NULL) {
         return NULL;
     }
