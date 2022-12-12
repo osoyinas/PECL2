@@ -134,6 +134,8 @@ void CAE:: buscarPaquete(string ID){
 }
 void CAE:: extraer(string ID, string CP){
     if(!cp_valida(CP)){
+        cout<<"Inserte un formato valido."<<endl;
+        cin.get();
         return;
     }
     arbolCentrales.buscarNodo(stoi(CP))->elemento.listaPaquetes.borrarPaquete(ID);
@@ -141,23 +143,26 @@ void CAE:: extraer(string ID, string CP){
 }
 void CAE:: llevar(string ID,string CP){
     if(!cp_valida(CP)){
+        cout<<"Inserte un formato valido."<<endl;
+        cin.get();
         return;
     }
     if(listaPaquetes.buscarNodo(ID)){
         Paquete paquete = listaPaquetes.buscarPaquete(ID);
         listaPaquetes.borrarPaquete(ID);
         arbolCentrales.buscarNodo(stoi(CP))->elemento.addPaquete(paquete);
-        cout<<"Paquete con ID " <<ID<<" insertado en "<< CP<<endl;
-        cin.get();
-        return;
+        cout<<"Paquete con ID " <<ID<<" insertado en "<< CP<<"."<<endl;
+
     }
     else{
-        cout<<"El paquete no se encuentra en el CAE"<<endl;
+        cout<<"El paquete no se encuentra en el CAE."<<endl;
     }
-
+    cin.get();
 }
 void CAE:: llevar(string CPOrigen,string CPDestino, string ID){
     if(!cp_valida(CPOrigen) || !cp_valida(CPDestino)){
+        cout<<"Inserte un formato valido."<<endl;
+        cin.get();
         return;
     }
     if(arbolCentrales.buscarNodo(stoi(CPOrigen))->elemento.listaPaquetes.buscarNodo(ID)){ //comprueba si existe el paquete
@@ -165,12 +170,11 @@ void CAE:: llevar(string CPOrigen,string CPDestino, string ID){
         arbolCentrales.buscarNodo(stoi(CPOrigen))->elemento.listaPaquetes.borrarPaquete(ID); //se borra el paquete de la central origen
         arbolCentrales.buscarNodo(stoi(CPDestino))->elemento.addPaquete(paquete); //se inserta el paquete en la central destino
         cout<<"Paquete con ID " <<ID<<" insertado en "<< CPDestino<<endl;
-        cin.get();
-        return;
     }
     else{
         cout<<"El paquete no se encuentra en la CP "<<CPOrigen<<"."<<endl;
     }
+    cin.get();
 }
 void CAE::estadistica() {
     cout <<endl<<"                                  ESTADISTICA"<<endl<<endl;
@@ -181,6 +185,5 @@ void CAE::estadistica() {
     arbolCentrales.mostrarEstadistica(arbolCentrales.getRaiz(), N2);
     cout<<"- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"<<endl;
     cout <<setfill(' ')<< setw(23) << "Total" << "\t\t"<< arbolCentrales.length <<"\t\t"<< N2 - listaPaquetes.len<<"/"<<N2 << "\t\t"<< porcentaje <<"%"<< endl;
-
     cin.get();
 }

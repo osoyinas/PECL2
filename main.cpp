@@ -19,7 +19,7 @@ using namespace std;
 
 int main()
 {
-    //establecerSemilla();
+    establecerSemilla();
     //Constantes
     CAE cae(N1,N2,N3,N4);
     cae.mostrar();
@@ -105,6 +105,7 @@ int main()
                     break;
                 }
                 case 0: {
+                    cout<<"Terminando ejecucion..."<<endl;
                     return 0;
                 } break;
             }
