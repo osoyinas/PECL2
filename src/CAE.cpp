@@ -54,9 +54,10 @@ void CAE::insertarPaquetes() {
 void CAE::insertarPaquete(Paquete paquete){
     paquetesEnviados++;
     int idPaquete = paquete.CP;
-    arbolCentrales.buscarNodo(idPaquete)->elemento.addPaquete(paquete);
+    if(arbolCentrales.buscarNodo(idPaquete)->elemento.ID == paquete.CP){
+        arbolCentrales.buscarNodo(idPaquete)->elemento.addPaquete(paquete);
+    }
 }
-
 void CAE::mostrar(){
     cout <<endl;
     cout <<"                              *CAE*                              "<< endl;
@@ -112,7 +113,10 @@ void CAE:: examinarCP(string CP){
     if(!cp_valida(CP)){
         return;
     }
-
+    if(arbolCentrales.buscarNodo(stoi(CP))->elemento.ID == stoi(CP)){
+        cout<<"No existe la central indicada"<<endl;
+        return;
+    }
     cout <<"-----------------------------------------------------------------"<<endl;
     cout <<getID(arbolCentrales.buscarNodo(stoi(CP))->elemento.ID)<<setw(60)<<arbolCentrales.buscarNodo(stoi(CP))->elemento.localidad<< endl;
     cout <<"-----------------------------------------------------------------"<<endl;
@@ -122,9 +126,16 @@ void CAE:: examinarCP(string CP){
 
 void CAE:: borrarCP(string CP){
     if(!cp_valida(CP)){
+        cout<<"Inserte un formato valido."<<endl;
+        cin.get();
         return;
     }
-    arbolCentrales.borrarNodo(arbolCentrales.getRaiz(), stoi(CP));
+    if(arbolCentrales.buscarNodo(stoi(CP))->elemento.ID == stoi(CP)){
+        arbolCentrales.borrarNodo(arbolCentrales.pRaiz, stoi(CP));
+        cout<<"Central eliminada correctamente"<<endl;
+    }
+    else cout<<"No existe la central."<<endl;
+    cin.get();
 
 }
 

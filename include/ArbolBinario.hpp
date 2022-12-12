@@ -9,31 +9,34 @@ using namespace std;
 class ArbolBinario
 {
 private:
-    struct NodoBinario* raiz;
 public:
+    struct NodoBinario* pRaiz;
     ArbolBinario()
     {
-        raiz = NULL;
+        pRaiz = NULL;
     }
     NodoBinario* crearNodo(Central);
     NodoBinario* insertarNodo(NodoBinario*, Central);
-    NodoBinario* borrarNodo(NodoBinario*, int);
+    //NodoBinario* borrarNodo(NodoBinario*, int);
+    void borrarNodo(NodoBinario* &raiz, int);
     NodoBinario* buscarNodo(int id);
     void inOrden(NodoBinario*);
     void preOrden(NodoBinario*);
     void postOrden(NodoBinario*);
-    void mostrarCentrales(NodoBinario* raiz);
-    void mostrarEstadistica(NodoBinario* raiz, int N3);
+    void mostrarCentrales(NodoBinario* pRaiz);
+    void mostrarEstadistica(NodoBinario* pRaiz, int N3);
+    void pruebaNull(NodoBinario* nodo);
     bool esHoja(NodoBinario* nodo) { return !nodo->derecho && !nodo->izquierdo; }
-    NodoBinario* getPadre(NodoBinario* , NodoBinario*);
-    void buscarPaquete(NodoBinario*raiz,string ID);
+    NodoBinario* getPadre(NodoBinario* raiz, NodoBinario*);
+    void buscarPaquete(NodoBinario*pRaiz,string ID);
     NodoBinario* getMin(NodoBinario*);
+    NodoBinario* getMax(NodoBinario*);
 
     NodoBinario* getRaiz() {
-        return raiz;
+        return pRaiz;
     }
     void setRaiz(NodoBinario* nodo) {
-        raiz = nodo;
+        pRaiz = nodo;
     }
     int length = 0;
 };

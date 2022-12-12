@@ -31,7 +31,7 @@ public:
     void extraer(string, string);
     void llevar(string, string);
     void llevar(string, string, string);
-
+    void comprobarNull(string);
 
     void estadistica();
 
@@ -59,5 +59,5 @@ private:
                                    "Los Santos de la Humosa"
                                    };
 };
-
+bool cp_valida(string CP);
 #endif // CAE_HPP
