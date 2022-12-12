@@ -91,7 +91,7 @@ void CAE :: insertarCP(string CP, string localidad){
         examinarCP(CP);
     }
     else{
-        cout<<"Tiene que insertar un codigo de CP valido, 4 digitos"<<endl;
+        cout<<"Tiene que insertar un codigo de CP valido, 4 digitos."<<endl;
 
     }
     cin.get();
@@ -111,10 +111,6 @@ void CAE :: resetPaquetesEnviados(){
 
 void CAE:: examinarCP(string CP){
     if(!cp_valida(CP)){
-        return;
-    }
-    if(arbolCentrales.buscarNodo(stoi(CP))->elemento.ID == stoi(CP)){
-        cout<<"No existe la central indicada"<<endl;
         return;
     }
     cout <<"-----------------------------------------------------------------"<<endl;
