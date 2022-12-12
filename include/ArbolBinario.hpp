@@ -9,6 +9,7 @@ using namespace std;
 class ArbolBinario
 {
 private:
+
 public:
     struct NodoBinario* pRaiz;
     ArbolBinario()
