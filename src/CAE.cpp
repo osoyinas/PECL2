@@ -2,7 +2,7 @@
 #include "Central.hpp"
 
 using std::stoi;
-
+//Constructor
 CAE::CAE(int N1, int N2, int N3, int N4){
     vector<int> ids; //lista que almacena los IDS que identifican a los paquetes y las centrales.
     Semicoord lmin = crearSemicoordenada(40, 6, 0);
@@ -34,6 +34,8 @@ CAE::CAE(int N1, int N2, int N3, int N4){
         listaPaquetes.insertarNodo(paquete,'p');    //Inserccion del paquete al principio de la lista.
     }
 }
+
+//Inserta N3 paquetes en las centrales del arbol binario y los elimina de la lista
 void CAE::insertarPaquetes() {
     int iteraciones;
     if (listaPaquetes.len<N3){
@@ -50,7 +52,7 @@ void CAE::insertarPaquetes() {
         }
     }
 }
-
+//Inserta un paquete de la lista en las centrales
 void CAE::insertarPaquete(Paquete paquete){
     paquetesEnviados++;
     int idPaquete = paquete.CP;
@@ -58,6 +60,7 @@ void CAE::insertarPaquete(Paquete paquete){
         arbolCentrales.buscarNodo(idPaquete)->elemento.addPaquete(paquete);
     }
 }
+//Muestra por pantalla la lista de paquetes y las centrales
 void CAE::mostrar(){
     cout <<endl;
     cout <<"                              *CAE*                              "<< endl;
@@ -68,20 +71,22 @@ void CAE::mostrar(){
     cout<<endl<<endl;
     cout <<"                           *CENTRALES*                           "<< endl;
 
-
     arbolCentrales.mostrarCentrales(arbolCentrales.getRaiz());
 }
 
+//Comprueba si la CP introducida tiene el formato correcto "1234".
 bool cp_valida(string CP){
-  bool valida = true;
-  for (char c : CP) {
-    if (!isdigit(c)) {
-      valida = false;
-      break;
+    bool valida = true;
+    for (char c : CP) {
+        if (!isdigit(c)) {
+        valida = false;
+        break;
+        }
     }
-  }
   return valida && CP.size()==4;
 }
+
+//Inserta en el arbol binario de centrales una nueva central.
 void CAE :: insertarCP(string CP, string localidad){
 
   // Comprobamos si cada carácter de str es un dígito
@@ -96,19 +101,21 @@ void CAE :: insertarCP(string CP, string localidad){
     }
     cin.get();
 }
-
+//Devuelve true si la lista de paquetes tiene paquetes
 bool CAE :: tienePaquetes(){
     return listaPaquetes.len > 0;
 }
-
+//Devuelve el numero de paquetes enviados (introducidos en las centrales)
 int CAE :: getPaquetesEnviados(){
     return paquetesEnviados;
 }
 
+//Pone a 0 el numero de paquetes enviados
 void CAE :: resetPaquetesEnviados(){
     paquetesEnviados = 0;
 }
 
+//Muestra por pantalla la central indicada
 void CAE:: examinarCP(string CP){
     if(!cp_valida(CP)){
         return;
@@ -119,7 +126,7 @@ void CAE:: examinarCP(string CP){
     arbolCentrales.buscarNodo(stoi(CP))->elemento.listaPaquetes.mostrar();
     cout <<"-----------------------------------------------------------------"<<endl;
 }
-
+//Borra la central indicada llamando a la funcion borrarNodo()
 void CAE:: borrarCP(string CP){
     if(!cp_valida(CP)){
         cout<<"Inserte un formato valido."<<endl;
@@ -135,10 +142,13 @@ void CAE:: borrarCP(string CP){
 
 }
 
+//Busca un paquete en todas las centrales
 void CAE:: buscarPaquete(string ID){
     arbolCentrales.buscarPaquete(arbolCentrales.getRaiz(), ID);
     cin.get();
 }
+
+//Elimina un paquete concreto de una central concreta
 void CAE:: extraer(string ID, string CP){
     if(!cp_valida(CP)){
         cout<<"Inserte un formato valido."<<endl;
@@ -148,6 +158,8 @@ void CAE:: extraer(string ID, string CP){
     arbolCentrales.buscarNodo(stoi(CP))->elemento.listaPaquetes.borrarPaquete(ID);
     cin.get();
 }
+
+//Lleva un paquete concreto del CAE a una central concreta
 void CAE:: llevar(string ID,string CP){
     if(!cp_valida(CP)){
         cout<<"Inserte un formato valido."<<endl;
@@ -155,9 +167,9 @@ void CAE:: llevar(string ID,string CP){
         return;
     }
     if(listaPaquetes.buscarNodo(ID)){
-        Paquete paquete = listaPaquetes.buscarPaquete(ID);
-        listaPaquetes.borrarPaquete(ID);
-        arbolCentrales.buscarNodo(stoi(CP))->elemento.addPaquete(paquete);
+        Paquete paquete = listaPaquetes.buscarPaquete(ID); //Busca el paquete
+        listaPaquetes.borrarPaquete(ID); //borra el paquete
+        arbolCentrales.buscarNodo(stoi(CP))->elemento.addPaquete(paquete); //Anade el paquete a la central que le corresponde
         cout<<"Paquete con ID " <<ID<<" insertado en "<< CP<<"."<<endl;
 
     }
@@ -166,6 +178,8 @@ void CAE:: llevar(string ID,string CP){
     }
     cin.get();
 }
+
+//Lleva un paquete cocreto de una cp a otra.
 void CAE:: llevar(string CPOrigen,string CPDestino, string ID){
     if(!cp_valida(CPOrigen) || !cp_valida(CPDestino)){
         cout<<"Inserte un formato valido."<<endl;
@@ -183,6 +197,8 @@ void CAE:: llevar(string CPOrigen,string CPDestino, string ID){
     }
     cin.get();
 }
+
+//Muestra por pantalla una estadistica por frecuencias absolutas y relativas.
 void CAE::estadistica() {
     cout <<endl<<"                                  ESTADISTICA"<<endl<<endl;
     float p = (float)(N2 - listaPaquetes.len)*100/(float)N2;

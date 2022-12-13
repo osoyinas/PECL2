@@ -18,7 +18,6 @@ public:
     }
     NodoBinario* crearNodo(Central);
     NodoBinario* insertarNodo(NodoBinario*, Central);
-    //NodoBinario* borrarNodo(NodoBinario*, int);
     void borrarNodo(NodoBinario* &raiz, int);
     NodoBinario* buscarNodo(int id);
     void inOrden(NodoBinario*);
@@ -26,12 +25,9 @@ public:
     void postOrden(NodoBinario*);
     void mostrarCentrales(NodoBinario* pRaiz);
     void mostrarEstadistica(NodoBinario* pRaiz, int N3);
-    void pruebaNull(NodoBinario* nodo);
     bool esHoja(NodoBinario* nodo) { return !nodo->derecho && !nodo->izquierdo; }
-    NodoBinario* getPadre(NodoBinario* raiz, NodoBinario*);
     void buscarPaquete(NodoBinario*pRaiz,string ID);
     NodoBinario* getMin(NodoBinario*);
-    NodoBinario* getMax(NodoBinario*);
 
     NodoBinario* getRaiz() {
         return pRaiz;

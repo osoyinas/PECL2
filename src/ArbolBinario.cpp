@@ -15,13 +15,6 @@ NodoBinario* ArbolBinario :: getMin(NodoBinario* punteroRaiz) {
     return punteroRaiz;
 }
 
-NodoBinario* ArbolBinario :: getMax(NodoBinario* punteroRaiz) {
-    while(punteroRaiz->derecho != NULL)
-    {
-        punteroRaiz = punteroRaiz->derecho;
-    }
-    return punteroRaiz;
-}
 NodoBinario* ArbolBinario :: buscarNodo(int id) {
     NodoBinario* punteroRaiz = this->pRaiz;
     while(punteroRaiz != NULL){

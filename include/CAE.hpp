@@ -13,30 +13,29 @@ using namespace std;
 class CAE
 {
 public:
+    //Constructor
     CAE(int N1, int N2, int N3, int N4);
-    Lista listaPaquetes;
-    ArbolBinario arbolCentrales;
-    void insertarPaquete(Paquete);
+    //Metodos
     void insertarPaquetes();
     void mostrar();
     void insertarCP(string CP, string localidad);
     void borrarCP(string CP);
     void buscarPaquete(string id);
     void transferirPaquete(string id, string origenCP, string destinoCP);
-    int getPaquetesEnviados();
     void resetPaquetesEnviados();
+    int getPaquetesEnviados();
     bool tienePaquetes();
     void examinarCP(string CP);
     void buscarPaquete();
     void extraer(string, string);
     void llevar(string, string);
     void llevar(string, string, string);
-    void comprobarNull(string);
-
     void estadistica();
 
-
 private:
+    Lista listaPaquetes;
+    ArbolBinario arbolCentrales;
+    void insertarPaquete(Paquete);
     int paquetesEnviados = 0;
     int N1;
     int N2;
