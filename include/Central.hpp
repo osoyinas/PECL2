@@ -13,8 +13,6 @@ struct Central {
     Lista listaPaquetes;
 
     void addPaquete(Paquete paquete);
-    void setID(int id);
-    string getID();
 };
 Central crearCentral(string localidad, int ID);
 int generarID();

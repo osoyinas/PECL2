@@ -5,13 +5,11 @@
 #include "NodoLista.hpp"
 
 using namespace std;
-class Lista
-{
+class Lista {
     private:
         pnodo cabeza, actual, final;
     public:
         Lista();
-        ~Lista();
         void insertarNodo(Paquete v, char c);
         void borrarNodo(char c);
         bool listaVacia();
@@ -21,13 +19,13 @@ class Lista
         void esPrimero();
         void esUltimo();
         bool esActual();
+        int getLength();
         void borrarPaquete(string ID);
         Paquete buscarPaquete(string ID);
         pnodo buscarNodo(string ID);
         Paquete getUlt();
         void mostrar();
         Paquete valorActual();
-        int len = 0;
 };
 
 #endif // LISTA_HPP

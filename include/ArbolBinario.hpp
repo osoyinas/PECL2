@@ -6,15 +6,13 @@
 #include <cmath>
 using namespace std;
 
-class ArbolBinario
-{
-private:
+class ArbolBinario {
 
 public:
-    struct NodoBinario* pRaiz;
+    struct NodoBinario* RAIZ;
     ArbolBinario()
     {
-        pRaiz = NULL;
+        RAIZ = NULL;
     }
     NodoBinario* crearNodo(Central);
     NodoBinario* insertarNodo(NodoBinario*, Central);
@@ -23,18 +21,14 @@ public:
     void inOrden(NodoBinario*);
     void preOrden(NodoBinario*);
     void postOrden(NodoBinario*);
-    void mostrarCentrales(NodoBinario* pRaiz);
-    void mostrarEstadistica(NodoBinario* pRaiz, int N3);
+    int getLength(int len, NodoBinario* raiz);
+    void mostrarCentrales(NodoBinario* RAIZ);
+    void mostrarEstadistica(NodoBinario* RAIZ, int N3);
     bool esHoja(NodoBinario* nodo) { return !nodo->derecho && !nodo->izquierdo; }
-    void buscarPaquete(NodoBinario*pRaiz,string ID);
-    NodoBinario* getMin(NodoBinario*);
-
-    NodoBinario* getRaiz() {
-        return pRaiz;
-    }
+    void buscarPaquete(NodoBinario*RAIZ,string ID);
     void setRaiz(NodoBinario* nodo) {
-        pRaiz = nodo;
+        RAIZ = nodo;
     }
-    int length = 0;
 };
+
 #endif // ARBOLBINARIO_HPP

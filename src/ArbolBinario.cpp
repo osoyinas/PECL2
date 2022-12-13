@@ -4,19 +4,12 @@ NodoBinario* ArbolBinario :: crearNodo(Central elemEnviado) {
     NodoBinario* nuevoNodo = new NodoBinario();
     nuevoNodo->elemento = elemEnviado;
     nuevoNodo->izquierdo = nuevoNodo->derecho = NULL;
-    length++;
     return nuevoNodo;
 }
-NodoBinario* ArbolBinario :: getMin(NodoBinario* punteroRaiz) {
-    while(punteroRaiz->izquierdo != NULL)
-    {
-        punteroRaiz = punteroRaiz->izquierdo;
-    }
-    return punteroRaiz;
-}
+
 
 NodoBinario* ArbolBinario :: buscarNodo(int id) {
-    NodoBinario* punteroRaiz = this->pRaiz;
+    NodoBinario* punteroRaiz = this->RAIZ;
     while(punteroRaiz != NULL){
         if(punteroRaiz->elemento.ID == id){
             return punteroRaiz;
@@ -35,23 +28,29 @@ NodoBinario* ArbolBinario :: buscarNodo(int id) {
         return punteroRaiz;
     }
 }
-NodoBinario* ArbolBinario :: insertarNodo(NodoBinario* pRaiz, Central elemEnviado) {
-    if(pRaiz == NULL)
+int ArbolBinario::getLength(int len, NodoBinario* raiz){
+    if(raiz == NULL)
+        return 0;
+    else
+        return 1+ getLength(len, raiz->izquierdo) + getLength(len, raiz->derecho);
+
+}
+NodoBinario* ArbolBinario :: insertarNodo(NodoBinario* RAIZ, Central elemEnviado) {
+    if(RAIZ == NULL)
     {
         return crearNodo(elemEnviado);
     }
-    if(elemEnviado.ID < pRaiz->elemento.ID)
+    if(elemEnviado.ID < RAIZ->elemento.ID)
     {
-        pRaiz->izquierdo = insertarNodo(pRaiz->izquierdo, elemEnviado);
+        RAIZ->izquierdo = insertarNodo(RAIZ->izquierdo, elemEnviado);
     }
-    if(elemEnviado.ID > pRaiz->elemento.ID)
+    if(elemEnviado.ID > RAIZ->elemento.ID)
     {
-        pRaiz->derecho = insertarNodo(pRaiz->derecho, elemEnviado);
+        RAIZ->derecho = insertarNodo(RAIZ->derecho, elemEnviado);
     }
-    if(pRaiz->elemento.ID == elemEnviado.ID){
-        length++;
+    if(RAIZ->elemento.ID == elemEnviado.ID){
     }
-    return pRaiz;
+    return RAIZ;
 }
 
 void ArbolBinario::borrarNodo(NodoBinario* &raiz, int ID)
@@ -66,7 +65,7 @@ void ArbolBinario::borrarNodo(NodoBinario* &raiz, int ID)
     // encontramos el nodo a borrar
     else {
         // caso 1: el nodo es una hoja (no tiene hijos)
-        if (raiz->izquierdo == NULL && raiz->derecho == NULL) {
+        if (esHoja(raiz)) {
             delete raiz;
             raiz = NULL;
         }
@@ -92,76 +91,76 @@ void ArbolBinario::borrarNodo(NodoBinario* &raiz, int ID)
     }
 }
 
-void ArbolBinario :: inOrden(NodoBinario* pRaiz) {
-    if(pRaiz == NULL) {
+void ArbolBinario :: inOrden(NodoBinario* RAIZ) {
+    if(RAIZ == NULL) {
         return;
     }
 
-    inOrden(pRaiz->izquierdo);
-    cout << pRaiz->elemento.ID << "\n";
-    inOrden(pRaiz->derecho);
+    inOrden(RAIZ->izquierdo);
+    cout << RAIZ->elemento.ID << "\n";
+    inOrden(RAIZ->derecho);
 }
 
-void ArbolBinario :: preOrden(NodoBinario* pRaiz) {
-    if(pRaiz == NULL) return;
-    cout << pRaiz->elemento.ID << "\n";
-    preOrden(pRaiz->izquierdo);
-    preOrden(pRaiz->derecho);
+void ArbolBinario :: preOrden(NodoBinario* RAIZ) {
+    if(RAIZ == NULL) return;
+    cout << RAIZ->elemento.ID << "\n";
+    preOrden(RAIZ->izquierdo);
+    preOrden(RAIZ->derecho);
 }
-void ArbolBinario :: postOrden(NodoBinario* pRaiz) {
-    if(pRaiz == NULL) {
+void ArbolBinario :: postOrden(NodoBinario* RAIZ) {
+    if(RAIZ == NULL) {
     return;
     }
-    postOrden(pRaiz->izquierdo);
-    postOrden(pRaiz->derecho);
-    cout << pRaiz->elemento.ID << "  "<<pRaiz->elemento.localidad<< "\n";
+    postOrden(RAIZ->izquierdo);
+    postOrden(RAIZ->derecho);
+    cout << RAIZ->elemento.ID << "  "<<RAIZ->elemento.localidad<< "\n";
 }
-void ArbolBinario :: mostrarEstadistica(NodoBinario* pRaiz, int N2){
-    if(pRaiz == NULL) {
+void ArbolBinario :: mostrarEstadistica(NodoBinario* RAIZ, int N2){
+    if(RAIZ == NULL) {
         return;
     }
-    mostrarEstadistica(pRaiz->izquierdo, N2);
-    mostrarEstadistica(pRaiz->derecho, N2);
-    float p = (float)(pRaiz->elemento.listaPaquetes.len)*100/(float)N2;
+    mostrarEstadistica(RAIZ->izquierdo, N2);
+    mostrarEstadistica(RAIZ->derecho, N2);
+    float p = (float)(RAIZ->elemento.listaPaquetes.getLength())*100/(float)N2;
     float porcentaje = round(p*100)/100;
-    cout <<setfill(' ')<< setw(23) << pRaiz->elemento.localidad << "\t\t"<<getID(pRaiz->elemento.ID) << "\t\t"<< pRaiz->elemento.listaPaquetes.len  << "\t\t"<< porcentaje <<"%"<< endl;
+    cout <<setfill(' ')<< setw(23) << RAIZ->elemento.localidad << "\t\t"<<getID(RAIZ->elemento.ID) << "\t\t"<< RAIZ->elemento.listaPaquetes.getLength()  << "\t\t"<< porcentaje <<"%"<< endl;
 }
 
 
-void ArbolBinario :: mostrarCentrales(NodoBinario* pRaiz) {
-    if(pRaiz == NULL) {
+void ArbolBinario :: mostrarCentrales(NodoBinario* RAIZ) {
+    if(RAIZ == NULL) {
     return;
     }
-    mostrarCentrales(pRaiz->izquierdo);
-    mostrarCentrales(pRaiz->derecho);
+    mostrarCentrales(RAIZ->izquierdo);
+    mostrarCentrales(RAIZ->derecho);
     cout<<endl;
     cout <<"-----------------------------------------------------------------"<<endl;
-    cout <<getID(pRaiz->elemento.ID)<<setw(60)<<pRaiz->elemento.localidad<< endl;
+    cout <<getID(RAIZ->elemento.ID)<<setw(60)<<RAIZ->elemento.localidad<< endl;
     cout <<"-----------------------------------------------------------------"<<endl;
-    pRaiz->elemento.listaPaquetes.mostrar();
+    RAIZ->elemento.listaPaquetes.mostrar();
     cout <<"-----------------------------------------------------------------"<<endl;
     cout<<endl;
     cout<<endl;
     cout<<endl;
 
 }
-void ArbolBinario :: buscarPaquete(NodoBinario* pRaiz,string ID) {
-    if(pRaiz == NULL){
+void ArbolBinario :: buscarPaquete(NodoBinario* RAIZ,string ID) {
+    if(RAIZ == NULL){
         return;
     }
-    if(getCodigoIdStr(pRaiz->elemento.listaPaquetes.buscarPaquete(ID).id) == ID) {
+    if(getCodigoIdStr(RAIZ->elemento.listaPaquetes.buscarPaquete(ID).id) == ID) {
         cout <<setw(7)<<"ID"<<setw(15)<<"NIF"<<setw(25)<<"Coordenadas" <<setw(15)<<"CP"<< endl;
-        cout << setw(7)<<getCodigoIdStr(pRaiz->elemento.listaPaquetes.buscarPaquete(ID).id)<<setw(15)
-        <<getNifStr(pRaiz->elemento.listaPaquetes.buscarPaquete(ID).nif)<<setw(25)<<getCoordenadaStr(pRaiz->elemento.listaPaquetes.buscarPaquete(ID).coords)
-        <<setw(15)<<getID(pRaiz->elemento.listaPaquetes.buscarPaquete(ID).CP) <<endl;
+        cout << setw(7)<<getCodigoIdStr(RAIZ->elemento.listaPaquetes.buscarPaquete(ID).id)<<setw(15)
+        <<getNifStr(RAIZ->elemento.listaPaquetes.buscarPaquete(ID).nif)<<setw(25)<<getCoordenadaStr(RAIZ->elemento.listaPaquetes.buscarPaquete(ID).coords)
+        <<setw(15)<<getID(RAIZ->elemento.listaPaquetes.buscarPaquete(ID).CP) <<endl;
     }
     else{
-        if(!esHoja(pRaiz)) {
-            if(pRaiz->izquierdo) {
-                buscarPaquete(pRaiz->izquierdo,ID);
+        if(!esHoja(RAIZ)) {
+            if(RAIZ->izquierdo) {
+                buscarPaquete(RAIZ->izquierdo,ID);
             }
-            if(pRaiz->derecho) {
-                buscarPaquete(pRaiz->derecho,ID);
+            if(RAIZ->derecho) {
+                buscarPaquete(RAIZ->derecho,ID);
             }
         }
     }

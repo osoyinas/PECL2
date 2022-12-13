@@ -2,6 +2,11 @@
 const int ASCENDENTE=0;
 const int DESCENDENTE=1;
 
+Lista::Lista() {
+    cabeza = NULL;
+    actual = NULL;
+    final = NULL;
+}
 string getID(int cp){
 
     string str = "";
@@ -12,25 +17,7 @@ string getID(int cp){
     return str;
 }
 
-Lista::Lista() {
-    cabeza = NULL;
-    actual = NULL;
-    final = NULL;
-}
-Lista::~Lista() {
-    pnodo aux;
-    esPrimero();
-    while(cabeza){
-        aux = cabeza;
-        cabeza = cabeza->siguiente;
-        delete aux;
-    }
-    cabeza=NULL;
-    actual=NULL;
-    final=NULL;
-}
 void Lista::insertarNodo(Paquete v, char c) {
-    len++;
     pnodo aux;
     char tipoInsercion;
     tipoInsercion=c;
@@ -61,7 +48,6 @@ void Lista::borrarNodo(char c) {
             aux=final;
             cabeza = final = NULL;
             aux=NULL;
-            len--;
             delete aux;
         }
         else {
@@ -69,7 +55,6 @@ void Lista::borrarNodo(char c) {
             final=final->anterior;
             aux->anterior=NULL;
             final->siguiente=NULL;
-            len--;
             delete aux;
         }
     }
@@ -79,7 +64,6 @@ void Lista::borrarNodo(char c) {
             aux=cabeza;
                 cabeza = final = NULL;
                 aux=NULL;
-                len--;
                 delete aux;
             }
         else {
@@ -87,7 +71,6 @@ void Lista::borrarNodo(char c) {
             cabeza=cabeza->siguiente;
             aux->siguiente=NULL;
             cabeza->anterior=NULL;
-            len--;
             delete aux;
         }
     }
@@ -112,6 +95,16 @@ void Lista::recorrerLista (int orden) {
         }
     }
     cout << endl;
+}
+int Lista::getLength(){
+    int len = 0;
+    esPrimero();
+    pnodo aux = cabeza;
+    while(aux){
+        len++;
+        aux = aux->siguiente;
+    }
+    return len;
 }
 pnodo Lista::buscarNodo(string ID){
     pnodo aux=NULL;
@@ -150,8 +143,8 @@ void Lista::borrarPaquete(string ID){
         borrarNodo('f');
         return;
     }
-    pnodo aux = NULL;
-    aux = buscarNodo(ID);
+
+    pnodo aux = buscarNodo(ID);
     pnodo auxSiguiente = aux->siguiente;
     pnodo auxAnterior = aux->anterior;
     auxAnterior->siguiente = auxAnterior->siguiente->siguiente;

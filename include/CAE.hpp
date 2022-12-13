@@ -26,8 +26,7 @@ public:
     int getPaquetesEnviados();
     bool tienePaquetes();
     void examinarCP(string CP);
-    void buscarPaquete();
-    void extraer(string, string);
+    void extraer(string ID, string CP);
     void llevar(string, string);
     void llevar(string, string, string);
     void estadistica();

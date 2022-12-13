@@ -23,7 +23,7 @@ CAE::CAE(int N1, int N2, int N3, int N4){
             arbolCentrales.setRaiz(arbolCentrales.crearNodo(central)); //se establece la raiz del arbol.
         }
         else{
-            arbolCentrales.insertarNodo(arbolCentrales.getRaiz(), central); //se inserta la central en el arbol.
+            arbolCentrales.insertarNodo(arbolCentrales.RAIZ, central); //se inserta la central en el arbol.
         }
     }
     //Generacion de paquetes
@@ -38,8 +38,8 @@ CAE::CAE(int N1, int N2, int N3, int N4){
 //Inserta N3 paquetes en las centrales del arbol binario y los elimina de la lista
 void CAE::insertarPaquetes() {
     int iteraciones;
-    if (listaPaquetes.len<N3){
-        iteraciones = listaPaquetes.len;
+    if (listaPaquetes.getLength()<N3){
+        iteraciones = listaPaquetes.getLength();
     }
     else{
         iteraciones = N3;
@@ -71,7 +71,7 @@ void CAE::mostrar(){
     cout<<endl<<endl;
     cout <<"                           *CENTRALES*                           "<< endl;
 
-    arbolCentrales.mostrarCentrales(arbolCentrales.getRaiz());
+    arbolCentrales.mostrarCentrales(arbolCentrales.RAIZ);
 }
 
 //Comprueba si la CP introducida tiene el formato correcto "1234".
@@ -92,7 +92,7 @@ void CAE :: insertarCP(string CP, string localidad){
   // Comprobamos si cada carácter de str es un dígito
     if(cp_valida(CP)){
         Central centralInsertada = crearCentral(localidad, stoi(CP));
-        arbolCentrales.insertarNodo(arbolCentrales.getRaiz(), centralInsertada);
+        arbolCentrales.insertarNodo(arbolCentrales.RAIZ, centralInsertada);
         examinarCP(CP);
     }
     else{
@@ -103,7 +103,7 @@ void CAE :: insertarCP(string CP, string localidad){
 }
 //Devuelve true si la lista de paquetes tiene paquetes
 bool CAE :: tienePaquetes(){
-    return listaPaquetes.len > 0;
+    return listaPaquetes.getLength() > 0;
 }
 //Devuelve el numero de paquetes enviados (introducidos en las centrales)
 int CAE :: getPaquetesEnviados(){
@@ -134,7 +134,7 @@ void CAE:: borrarCP(string CP){
         return;
     }
     if(arbolCentrales.buscarNodo(stoi(CP))->elemento.ID == stoi(CP)){
-        arbolCentrales.borrarNodo(arbolCentrales.pRaiz, stoi(CP));
+        arbolCentrales.borrarNodo(arbolCentrales.RAIZ, stoi(CP));
         cout<<"Central eliminada correctamente"<<endl;
     }
     else cout<<"No existe la central."<<endl;
@@ -144,7 +144,7 @@ void CAE:: borrarCP(string CP){
 
 //Busca un paquete en todas las centrales
 void CAE:: buscarPaquete(string ID){
-    arbolCentrales.buscarPaquete(arbolCentrales.getRaiz(), ID);
+    arbolCentrales.buscarPaquete(arbolCentrales.RAIZ, ID);
     cin.get();
 }
 
@@ -201,12 +201,12 @@ void CAE:: llevar(string CPOrigen,string CPDestino, string ID){
 //Muestra por pantalla una estadistica por frecuencias absolutas y relativas.
 void CAE::estadistica() {
     cout <<endl<<"                                  ESTADISTICA"<<endl<<endl;
-    float p = (float)(N2 - listaPaquetes.len)*100/(float)N2;
+    float p = (float)(N2 - listaPaquetes.getLength())*100/(float)N2;
     float porcentaje = round(p*100)/100;
     cout <<setfill(' ')<< setw(23) << "Localidad" << "\t\t"<<"CP" << "\t\t"<< "Paquetes" << "\t"<<"Paquetes(%)"<< endl;
     cout<<"- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"<<endl;
-    arbolCentrales.mostrarEstadistica(arbolCentrales.getRaiz(), N2);
+    arbolCentrales.mostrarEstadistica(arbolCentrales.RAIZ, N2);
     cout<<"- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"<<endl;
-    cout <<setfill(' ')<< setw(23) << "Total" << "\t\t"<< arbolCentrales.length <<"\t\t"<< N2 - listaPaquetes.len<<"/"<<N2 << "\t\t"<< porcentaje <<"%"<< endl;
+    cout <<setfill(' ')<< setw(23) << "Total" << "\t\t"<< arbolCentrales.getLength(0, arbolCentrales.RAIZ) <<"\t\t"<< N2 - listaPaquetes.getLength()<<"/"<<N2 << "\t\t"<< porcentaje <<"%"<< endl;
     cin.get();
 }
